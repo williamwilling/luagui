@@ -4,13 +4,10 @@ local metatable = {}
 
 function metatable.__newindex(window, key, value)
   local self = getmetatable(window)
+  local setter = self['set_' .. key]
   
-  if key == 'title' then
-    self[window].title = self.set_title(window, value) or value
-  elseif key == 'width' then
-    self[window].width = self.set_width(window, value) or value
-  elseif key == 'height' then
-    self[window].height = self.set_height(window, value) or value
+  if setter ~= nil then
+    self[window][key] = setter(window, value) or value
   else
     rawset(window, key, value)
   end
@@ -18,13 +15,10 @@ end
 
 function metatable.__index(window, key)
   local self = getmetatable(window)
+  local setter = self['set_' .. key]
   
-  if key == 'title' then
-    return self[window].title
-  elseif key == 'width' then
-    return self[window].width
-  elseif key == 'height' then
-    return self[window].height
+  if setter ~= nil then
+    return self[window][key]
   end
   
   return rawget(window, key) or Window[key]
