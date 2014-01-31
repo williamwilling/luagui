@@ -1,15 +1,25 @@
 local Window = {}
 
-local metatable = {
-  __index = Window
-}
+local metatable = {}
 
 function metatable.__newindex(window, key, value)
   local self = getmetatable(window)
   
   if key == 'title' then
-    self.set_title(window, value)
+    self[window].title = self.set_title(window, value) or value
+  else
+    rawset(window, key, value)
   end
+end
+
+function metatable.__index(window, key)
+  local self = getmetatable(window)
+  
+  if key == 'title' then
+    return self[window].title
+  end
+  
+  return rawget(window, key) or Window[key]
 end
 
 function metatable.set_title(window, value)
@@ -30,6 +40,7 @@ function Window.create()
   window.wx_frame:Show(true)
   
   setmetatable(window, metatable);
+  metatable[window] = {}
   
   return window
 end
