@@ -31,10 +31,20 @@ function metatable.__index(window, key)
 end
 
 function metatable.set_title(window, value)
-  window.wx_frame:SetLabel(value)
+  if type(value) ~= 'string' and type(value) ~= 'number' then
+    local message = string.format('The title of a window must be a string, not a %s.', type(value))
+    error(message, 3)
+  end
+  
+  window.wx_frame:SetLabel(tostring(value))
 end
 
 function metatable.set_width(window, value)
+  if type(value) ~= 'number' then
+    local message = string.format('The width of a window must be a number, not a %s.', type(value))
+    error(message, 3)
+  end
+  
   local height = window.height or window.wx_frame:GetClientSize():GetHeight()
   window.wx_frame:SetClientSize(value, height)
   
@@ -42,6 +52,11 @@ function metatable.set_width(window, value)
 end
 
 function metatable.set_height(window, value)
+  if type(value) ~= 'number' then
+    local message = string.format('The height of a window must be a number, not a %s.', type(value))
+    error(message, 3)
+  end
+  
   local width = window.width or window.wx_frame:GetClientSize():GetWidth()
   window.wx_frame:SetClientSize(width, value)
   
@@ -64,6 +79,7 @@ function Window.create()
   setmetatable(window, metatable);
   metatable[window] = {}
   
+  window.title = ''
   window.width = 640
   window.height = 480
   
