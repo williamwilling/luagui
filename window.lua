@@ -37,11 +37,15 @@ end
 function metatable.set_width(window, value)
   local height = window.height or window.wx_frame:GetClientSize():GetHeight()
   window.wx_frame:SetClientSize(value, height)
+  
+  return window.wx_frame:GetClientSize():GetWidth()
 end
 
 function metatable.set_height(window, value)
   local width = window.width or window.wx_frame:GetClientSize():GetWidth()
   window.wx_frame:SetClientSize(width, value)
+  
+  return window.wx_frame:GetClientSize():GetHeight()
 end
 
 function Window.create()
