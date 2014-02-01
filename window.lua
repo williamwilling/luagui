@@ -1,29 +1,8 @@
+local common = require 'common'
 local Button = require 'button'
 
 local Window = {}
-local metatable = {}
-
-function metatable.__newindex(window, key, value)
-  local self = getmetatable(window)
-  local setter = self['set_' .. key]
-  
-  if setter ~= nil then
-    self[window][key] = setter(window, value) or value
-  else
-    rawset(window, key, value)
-  end
-end
-
-function metatable.__index(window, key)
-  local self = getmetatable(window)
-  local setter = self['set_' .. key]
-  
-  if setter ~= nil then
-    return self[window][key]
-  end
-  
-  return rawget(window, key) or Window[key]
-end
+local metatable = common.create_metatable(Window)
 
 function metatable.set_title(window, value)
   if type(value) ~= 'string' and type(value) ~= 'number' then
