@@ -12,6 +12,7 @@ function gui.run()
 end
 
 function gui.reload()
+  package.loaded.button = nil
   package.loaded.window = nil
   package.loaded.gui = nil
   

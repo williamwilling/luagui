@@ -1,5 +1,6 @@
-local Window = {}
+local Button = require 'button'
 
+local Window = {}
 local metatable = {}
 
 function metatable.__newindex(window, key, value)
@@ -87,14 +88,7 @@ function Window.create()
 end
 
 function Window:add_button()
-  local button = {}
-  
-  button.wx_button = wx.wxButton(
-    self.wx_panel,
-    wx.wxID_ANY,
-    '',
-    wx.wxDefaultPosition,
-    wx.wxDefaultSize)
+  return Button.create(self.wx_panel)
 end
 
 return Window
