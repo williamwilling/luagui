@@ -52,6 +52,30 @@ function metatable.set_y(button, value)
   button.wx_button:Move(x, value)
 end
 
+function metatable.set_width(button, value)
+  if type(value) ~= 'number' then
+    local message = string.format('The width of a button must be a number, not a %s.', type(value))
+    error(message, 3)
+  end
+  
+  local height = button.height or button.wx_button:GetClientSize():GetHeight()
+  button.wx_button:SetClientSize(value, height)
+  
+  return button.wx_button:GetClientSize():GetWidth()
+end
+
+function metatable.set_height(button, value)
+  if type(value) ~= 'number' then
+    local message = string.format('The height of a button must be a number, not a %s.', type(value))
+    error(message, 3)
+  end
+  
+  local width = button.width or button.wx_button:GetClientSize():GetWidth()
+  button.wx_button:SetClientSize(width, value)
+  
+  return button.wx_button:GetClientSize():GetHeight()
+end
+
 function Button.create(wx_parent)
   local button = {}
   
@@ -68,6 +92,8 @@ function Button.create(wx_parent)
   button.text = ''
   button.x = 0
   button.y = 0
+  button.width = button.wx_button:GetSize():GetWidth()
+  button.height = button.wx_button:GetSize():GetHeight()
   
   return button
 end
