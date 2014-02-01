@@ -1,5 +1,5 @@
-local common = require 'common'
-local Button = require 'button'
+local common = require 'gui.common'
+local Button = require 'gui.button'
 
 local Window = {}
 local metatable = common.create_metatable(Window)

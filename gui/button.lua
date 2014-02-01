@@ -1,4 +1,4 @@
-local common = require 'common'
+local common = require 'gui.common'
 
 local Button = {}
 local metatable = common.create_metatable(Button)
