@@ -23,6 +23,15 @@ function metatable.__index(button, key)
   return rawget(button, key) or Button[key]
 end
 
+function metatable.set_text(button, value)
+  if type(value) ~= 'string' and type(value) ~= 'number' then
+    local message = string.format('The text of a button must be a string, not a %s.', type(value))
+    error(message, 3)
+  end
+  
+  button.wx_button:SetLabel(tostring(value))
+end
+
 function metatable.set_x(button, value)
   if type(value) ~= 'number' then
     local message = string.format('The x-coordinate of a button must be a number, not a %s.', type(value))
