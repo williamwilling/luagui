@@ -68,6 +68,12 @@ function Window.create()
     wx.wxSize(640, 480),
     wx.wxDEFAULT_FRAME_STYLE)
   
+  window.wx_panel = wx.wxPanel(
+    window.wx_frame,
+    wx.wxID_ANY,
+    wx.wxDefaultPosition,
+    wx.wxDefaultSize)
+  
   window.wx_frame:Show(true)
   
   setmetatable(window, metatable);
@@ -78,6 +84,17 @@ function Window.create()
   window.height = 480
   
   return window
+end
+
+function Window:add_button()
+  local button = {}
+  
+  button.wx_button = wx.wxButton(
+    self.wx_panel,
+    wx.wxID_ANY,
+    '',
+    wx.wxDefaultPosition,
+    wx.wxDefaultSize)
 end
 
 return Window
