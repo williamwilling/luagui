@@ -15,9 +15,12 @@ function common.create_metatable(class)
 
     __index = function(object, key)
       local self = getmetatable(object)
+      local getter = self['get_' .. key]
       local setter = self['set_' .. key]
       
-      if setter ~= nil then
+      if getter ~= nil then
+        return getter(object)
+      elseif setter ~= nil then
         return self[object][key]
       end
       
@@ -27,13 +30,21 @@ function common.create_metatable(class)
 end
 
 function common.add_position(metatable, object_description)
+  metatable.get_x = function(object)
+    return object.wx:GetPosition():GetX()
+  end
+  
+  metatable.get_y = function(object)
+    return object.wx:GetPosition():GetY()
+  end
+
   metatable.set_x = function(object, value)
     if type(value) ~= 'number' then
       local message = string.format('The x-coordinate of %s must be a number, not a %s.', object_description, type(value))
       error(message, 3)
     end
     
-    local y = object.y or object.wx:GetPosition():GetY()
+    local y = object.y
     object.wx:Move(value, y)
   end
 
@@ -43,34 +54,42 @@ function common.add_position(metatable, object_description)
       error(message, 3)
     end
     
-    local x = object.x or object.wx:GetPosition():GetX()
+    local x = object.x
     object.wx:Move(x, value)
   end
 end
 
 function common.add_size(metatable, object_description)
-  metatable.set_width = function(window, value)
+  metatable.get_width = function(object)
+    return object.wx:GetSize():GetWidth()
+  end
+  
+  metatable.get_height = function(object)
+    return object.wx:GetSize().GetHeight()
+  end
+
+  metatable.set_width = function(object, value)
     if type(value) ~= 'number' then
       local message = string.format('The width of a window must be a number, not a %s.', type(value))
       error(message, 3)
     end
     
-    local height = window.height or window.wx:GetClientSize():GetHeight()
-    window.wx:SetClientSize(value, height)
+    local height = object.height or object.wx:GetClientSize():GetHeight()
+    object.wx:SetClientSize(value, height)
     
-    return window.wx:GetClientSize():GetWidth()
+    return object.wx:GetClientSize():GetWidth()
   end
 
-  metatable.set_height = function(window, value)
+  metatable.set_height = function(object, value)
     if type(value) ~= 'number' then
       local message = string.format('The height of a window must be a number, not a %s.', type(value))
       error(message, 3)
     end
     
-    local width = window.width or window.wx_frame:GetClientSize():GetWidth()
-    window.wx:SetClientSize(width, value)
+    local width = object.width or object.wx_frame:GetClientSize():GetWidth()
+    object.wx:SetClientSize(width, value)
     
-    return window.wx:GetClientSize():GetHeight()
+    return object.wx:GetClientSize():GetHeight()
   end
 end
 
