@@ -65,6 +65,10 @@ function Button.create(wx_parent)
   setmetatable(button, metatable)
   metatable[button] = {}
   
+  button.text = ''
+  button.x = 0
+  button.y = 0
+  
   return button
 end
 
