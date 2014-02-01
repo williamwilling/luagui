@@ -5,19 +5,7 @@ local Window = {}
 local metatable = common.create_metatable(Window)
 common.add_position(metatable, 'a window')
 common.add_size(metatable, 'a window')
-
-function metatable.get_title(window, value)
-  return window.wx:GetLabel()
-end
-
-function metatable.set_title(window, value)
-  if type(value) ~= 'string' and type(value) ~= 'number' then
-    local message = string.format('The title of a window must be a string, not a %s.', type(value))
-    error(message, 3)
-  end
-  
-  window.wx:SetLabel(tostring(value))
-end
+common.add_text(metatable, 'a window', 'title')
 
 function Window.create()
   local window = {}
