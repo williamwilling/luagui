@@ -3,6 +3,8 @@ local Button = require 'button'
 
 local Window = {}
 local metatable = common.create_metatable(Window)
+common.add_position(metatable, 'a window')
+common.add_size(metatable, 'a window')
 
 function metatable.set_title(window, value)
   if type(value) ~= 'string' and type(value) ~= 'number' then
@@ -10,37 +12,13 @@ function metatable.set_title(window, value)
     error(message, 3)
   end
   
-  window.wx_frame:SetLabel(tostring(value))
-end
-
-function metatable.set_width(window, value)
-  if type(value) ~= 'number' then
-    local message = string.format('The width of a window must be a number, not a %s.', type(value))
-    error(message, 3)
-  end
-  
-  local height = window.height or window.wx_frame:GetClientSize():GetHeight()
-  window.wx_frame:SetClientSize(value, height)
-  
-  return window.wx_frame:GetClientSize():GetWidth()
-end
-
-function metatable.set_height(window, value)
-  if type(value) ~= 'number' then
-    local message = string.format('The height of a window must be a number, not a %s.', type(value))
-    error(message, 3)
-  end
-  
-  local width = window.width or window.wx_frame:GetClientSize():GetWidth()
-  window.wx_frame:SetClientSize(width, value)
-  
-  return window.wx_frame:GetClientSize():GetHeight()
+  window.wx:SetLabel(tostring(value))
 end
 
 function Window.create()
   local window = {}
   
-  window.wx_frame = wx.wxFrame(
+  window.wx = wx.wxFrame(
     wx.NULL,
     wx.wxID_ANY,
     '',
@@ -49,19 +27,21 @@ function Window.create()
     wx.wxDEFAULT_FRAME_STYLE)
   
   window.wx_panel = wx.wxPanel(
-    window.wx_frame,
+    window.wx,
     wx.wxID_ANY,
     wx.wxDefaultPosition,
     wx.wxDefaultSize)
   
-  window.wx_frame:Show(true)
+  window.wx:Show(true)
   
   setmetatable(window, metatable);
   metatable[window] = {}
   
   window.title = ''
-  window.width = 640
-  window.height = 480
+  window.x = window.wx:GetPosition():GetX()
+  window.y = window.wx:GetPosition():GetY()
+  window.width = window.wx:GetSize():GetWidth()
+  window.height = window.wx:GetSize():GetHeight()
   
   return window
 end

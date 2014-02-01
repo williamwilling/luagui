@@ -26,4 +26,52 @@ function common.create_metatable(class)
   }
 end
 
+function common.add_position(metatable, object_description)
+  metatable.set_x = function(object, value)
+    if type(value) ~= 'number' then
+      local message = string.format('The x-coordinate of %s must be a number, not a %s.', object_description, type(value))
+      error(message, 3)
+    end
+    
+    local y = object.y or object.wx:GetPosition():GetY()
+    object.wx:Move(value, y)
+  end
+
+  metatable.set_y = function(object, value)
+    if type(value) ~= 'number' then
+      local message = string.format('The y-coordinate of %s must be a number, not a %s.', object_description, type(value))
+      error(message, 3)
+    end
+    
+    local x = object.x or object.wx:GetPosition():GetX()
+    object.wx:Move(x, value)
+  end
+end
+
+function common.add_size(metatable, object_description)
+  metatable.set_width = function(window, value)
+    if type(value) ~= 'number' then
+      local message = string.format('The width of a window must be a number, not a %s.', type(value))
+      error(message, 3)
+    end
+    
+    local height = window.height or window.wx:GetClientSize():GetHeight()
+    window.wx:SetClientSize(value, height)
+    
+    return window.wx:GetClientSize():GetWidth()
+  end
+
+  metatable.set_height = function(window, value)
+    if type(value) ~= 'number' then
+      local message = string.format('The height of a window must be a number, not a %s.', type(value))
+      error(message, 3)
+    end
+    
+    local width = window.width or window.wx_frame:GetClientSize():GetWidth()
+    window.wx:SetClientSize(width, value)
+    
+    return window.wx:GetClientSize():GetHeight()
+  end
+end
+
 return common
