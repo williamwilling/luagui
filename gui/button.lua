@@ -2,9 +2,9 @@ local common = require 'gui.common'
 
 local Button = {}
 local metatable = common.create_metatable(Button)
-common.add_position(metatable, 'a button')
-common.add_size(metatable, 'a button')
-common.add_label(metatable, 'a button', 'text')
+common.add_position(metatable, 'button')
+common.add_size(metatable, 'button')
+common.add_label(metatable, 'button', 'text')
 
 function Button.create(wx_parent)
   local button = {}
