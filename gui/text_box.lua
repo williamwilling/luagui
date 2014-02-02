@@ -17,8 +17,6 @@ function TextBox.create(wx_parent)
     wx.wxDefaultSize)
   
   setmetatable(text_box, metatable)
-  metatable[text_box] = {}
-  
   return text_box
 end
 

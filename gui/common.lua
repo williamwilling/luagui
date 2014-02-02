@@ -11,7 +11,7 @@ function common.create_metatable(class)
       local setter = self['set_' .. key]
       
       if setter ~= nil then
-        self[object][key] = setter(object, value) or value
+        self[key] = setter(object, value) or value
       else
         rawset(object, key, value)
       end
@@ -25,7 +25,7 @@ function common.create_metatable(class)
       if getter ~= nil then
         return getter(object)
       elseif setter ~= nil then
-        return self[object][key]
+        return self[key]
       end
       
       return rawget(object, key) or class[key]

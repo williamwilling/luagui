@@ -28,8 +28,6 @@ function Window.create()
   window.wx:Show(true)
   
   setmetatable(window, metatable);
-  metatable[window] = {}
-  
   return window
 end
 

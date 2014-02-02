@@ -25,8 +25,6 @@ function Button.create(wx_parent)
   button.wx:Connect(wx.wxEVT_COMMAND_BUTTON_CLICKED, on_click)
   
   setmetatable(button, metatable)
-  metatable[button] = {}
-  
   return button
 end
 
