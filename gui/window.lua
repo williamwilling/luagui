@@ -1,5 +1,6 @@
 local common = require 'gui.common'
 local Button = require 'gui.button'
+local TextBox = require 'gui.text_box'
 
 local Window = {}
 local metatable = common.create_metatable(Window)
@@ -34,6 +35,10 @@ end
 
 function Window:add_button()
   return Button.create(self.wx_panel)
+end
+
+function Window:add_text_box()
+  return TextBox.create(self.wx_panel)
 end
 
 return Window
