@@ -4,19 +4,7 @@ local TextBox = {}
 local metatable = common.create_metatable(TextBox)
 common.add_position(metatable, 'a textbox')
 common.add_size(metatable, 'a textbox')
-
-function metatable.get_text(object)
-  return object.wx:GetValue()
-end
-
-function metatable.set_text(object, value)
-  if type(value) ~= 'string' and type(value) ~= 'number' then
-    local message = string.format('The %s of %s must be a string, not a %s.', property_name, object_description, type(value))
-    error(message, 3)
-  end
-  
-  object.wx:SetValue(tostring(value))
-end
+common.add_value(metatable, 'a textbox', 'text')
 
 function TextBox.create(wx_parent)
   local text_box = {}

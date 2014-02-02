@@ -1,5 +1,5 @@
 return function(metatable, object_description, property_name)
-  property_name = property_name or 'text'
+  property_name = property_name or 'label'
   
   metatable['get_' .. property_name] = function(object, value)
     return object.wx:GetLabel()

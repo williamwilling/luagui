@@ -6,7 +6,7 @@ local Window = {}
 local metatable = common.create_metatable(Window)
 common.add_position(metatable, 'a window')
 common.add_size(metatable, 'a window')
-common.add_text(metatable, 'a window', 'title')
+common.add_label(metatable, 'a window', 'title')
 
 function Window.create()
   local window = {}

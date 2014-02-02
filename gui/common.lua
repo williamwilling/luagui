@@ -1,7 +1,8 @@
 local common = {}
 common.add_position = require 'gui.common.position'
 common.add_size = require 'gui.common.size'
-common.add_text = require 'gui.common.text'
+common.add_label = require 'gui.common.label'
+common.add_value = require 'gui.common.value'
 
 function common.create_metatable(class)
   return {
