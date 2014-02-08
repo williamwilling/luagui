@@ -16,13 +16,7 @@ function Button.create(wx_parent)
     wx.wxDefaultPosition,
     wx.wxDefaultSize)
   
-  local on_click = function()
-    if type(button.on_click) == 'function' then
-      button.on_click(button)
-    end
-  end
-  
-  button.wx:Connect(wx.wxEVT_COMMAND_BUTTON_CLICKED, on_click)
+  common.add_event(button, 'on_click', wx.wxEVT_COMMAND_BUTTON_CLICKED)
   
   setmetatable(button, metatable)
   return button

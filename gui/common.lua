@@ -33,4 +33,14 @@ function common.create_metatable(class)
   }
 end
 
+function common.add_event(object, event_name, wx_event)
+  local trigger_event = function()
+    if type(object[event_name]) == 'function' then
+      object[event_name](object)
+    end
+  end
+  
+  object.wx:Connect(wx_event, trigger_event)
+end
+
 return common
