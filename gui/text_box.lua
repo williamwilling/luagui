@@ -16,6 +16,14 @@ function TextBox.create(wx_parent)
     wx.wxDefaultPosition,
     wx.wxDefaultSize)
   
+  local on_text_changed = function()
+    if type(text_box.on_text_changed) == 'function' then
+      text_box.on_text_changed(text_box)
+    end
+  end
+  
+  text_box.wx:Connect(wx.wxEVT_COMMAND_TEXT_UPDATED, on_text_changed)
+  
   setmetatable(text_box, metatable)
   return text_box
 end
