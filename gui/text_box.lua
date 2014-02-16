@@ -6,6 +6,34 @@ common.add_position(metatable, 'textbox')
 common.add_size(metatable, 'textbox')
 common.add_value(metatable, 'textbox', 'text')
 
+function metatable.update_anchor(object)
+  local x, y, width, height
+  
+  local anchor_left = string.find(object.anchor, 'left') or string.find(object.anchor, 'all')
+  local anchor_right = string.find(object.anchor, 'right') or string.find(object.anchor, 'all')
+  local anchor_top = string.find(object.anchor, 'top') or string.find(object.anchor, 'all')
+  local anchor_bottom = string.find(object.anchor, 'bottom') or string.find(object.anchor, 'all')
+  
+  if anchor_left and anchor_right then
+    x = object.x
+    width = object.parent.width - object.x - object.anchoring.right
+  elseif anchor_right and not anchor_left then
+    x = object.parent.width - object.anchoring.right - object.width
+    width = object.width
+  end
+  
+  if anchor_top and anchor_bottom then
+    y = object.y
+    height = object.parent.height - object.y - object.anchoring.bottom
+  elseif not anchor_top and anchor_bottom then
+    y = object.parent.height - object.anchoring.bottom - object.height
+    height = object.height
+  end
+  
+  object.wx:Move(x, y)
+  object.wx:SetClientSize(width, height)
+end
+
 function TextBox.create(parent)
   local text_box = {
     parent = parent,
@@ -21,7 +49,7 @@ function TextBox.create(parent)
     wx.wxDefaultSize)
   
   common.add_event(text_box, 'on_text_changed', wx.wxEVT_COMMAND_TEXT_UPDATED)
-  parent.wx:Connect(wx.wxEVT_SIZE, function(event) text_box:update_anchor(parent.wx) event:Skip() end)
+  parent.wx:Connect(wx.wxEVT_SIZE, function(event) metatable.update_anchor(text_box) event:Skip() end)
   
   setmetatable(text_box, metatable)
   
@@ -33,21 +61,6 @@ function TextBox.create(parent)
   }
   
   return text_box
-end
-
-function TextBox:update_anchor(wx_parent)
-  local width = self.width
-  local height = self.height
-  
-  if string.find(self.anchor, 'right') or string.find(self.anchor, 'all') then
-    width = self.parent.width - self.x - self.anchoring.right
-  end
-  
-  if string.find(self.anchor, 'bottom') or string.find(self.anchor, 'all') then
-    height = self.parent.height - self.y - self.anchoring.bottom
-  end
-  
-  self.wx:SetClientSize(width, height)
 end
 
 return TextBox
