@@ -9,13 +9,11 @@ common.add_value(metatable, 'text box', 'text')
 
 function TextBox.create(parent)
   local text_box = {
-    parent = parent,
+    parent = parent
   }
   
-  local wx_parent = parent.wx_panel or parent.wx
-  
   text_box.wx = wx.wxTextCtrl(
-    wx_parent,
+    parent.wx_panel or parent.wx,
     wx.wxID_ANY,
     '',
     wx.wxDefaultPosition,
