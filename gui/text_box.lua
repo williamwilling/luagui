@@ -17,7 +17,10 @@ function metatable.update_anchor(object)
   if anchor_left and anchor_right then
     x = object.x
     width = object.parent.width - object.x - object.anchoring.right
-  elseif anchor_right and not anchor_left then
+  elseif anchor_left and not anchor_right then
+    x = object.x
+    width = object.width
+  elseif not anchor_left and anchor_right then
     x = object.parent.width - object.anchoring.right - object.width
     width = object.width
   end
@@ -25,6 +28,9 @@ function metatable.update_anchor(object)
   if anchor_top and anchor_bottom then
     y = object.y
     height = object.parent.height - object.y - object.anchoring.bottom
+  elseif anchor_top and not anchor_bottom then
+    y = object.y
+    height = object.height
   elseif not anchor_top and anchor_bottom then
     y = object.parent.height - object.anchoring.bottom - object.height
     height = object.height
