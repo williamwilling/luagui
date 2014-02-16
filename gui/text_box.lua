@@ -6,6 +6,39 @@ common.add_position(metatable, 'textbox')
 common.add_size(metatable, 'textbox')
 common.add_value(metatable, 'textbox', 'text')
 
+local set_x = metatable.set_x
+local set_y = metatable.set_y
+local set_width = metatable.set_width
+local set_height = metatable.set_height
+
+function metatable.set_x(object, value)
+  object.anchoring.left = value
+  object.anchoring.right = object.parent.width - object.width - object.anchoring.left
+  
+  return set_x(object, value)
+end
+
+function metatable.set_y(object, value)
+  object.anchoring.top = value
+  object.anchoring.bottom = object.parent.height - object.height - object.anchoring.top
+  
+  return set_y(object, value)
+end
+
+function metatable.set_width(object, value)
+  object.anchoring.right = object.parent.width - object.x - value
+  object.anchoring.left = object.x
+  
+  return set_width(object, value)
+end
+
+function metatable.set_height(object, value)
+  object.anchoring.bottom = object.parent.height - object.y - value
+  object.anchoring.top = object.y
+  
+  return set_height(object, value)
+end
+
 function metatable.update_anchor(object)
   local x, y, width, height
   
