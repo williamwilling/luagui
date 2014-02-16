@@ -15,6 +15,8 @@ return function(metatable, object_description)
     local height = object.height
     object.wx:SetClientSize(value, height)
     
+    object.anchoring.right = object.parent.width - object.x - value
+    
     return object.wx:GetClientSize():GetWidth()
   end
 
@@ -23,6 +25,8 @@ return function(metatable, object_description)
     
     local width = object.width
     object.wx:SetClientSize(width, value)
+    
+    object.anchoring.bottom = object.parent.height - object.y - value
     
     return object.wx:GetClientSize():GetHeight()
   end

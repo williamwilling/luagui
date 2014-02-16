@@ -36,7 +36,7 @@ function Window:add_button()
 end
 
 function Window:add_text_box()
-  return TextBox.create(self.wx_panel)
+  return TextBox.create(self)
 end
 
 return Window
