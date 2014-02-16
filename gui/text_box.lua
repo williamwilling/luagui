@@ -108,13 +108,7 @@ function TextBox.create(parent)
   parent.wx:Connect(wx.wxEVT_SIZE, function(event) metatable.update_anchor(text_box) event:Skip() end)
   
   setmetatable(text_box, metatable)
-  
-  text_box.anchoring = {
-    left = text_box.x,
-    right = parent.width - text_box.x - text_box.width,
-    top = text_box.y,
-    bottom = parent.height - text_box.y - text_box.height
-  }
+  text_box.anchor = 'top left'
   
   return text_box
 end
