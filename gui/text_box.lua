@@ -39,6 +39,15 @@ function metatable.set_height(object, value)
   return set_height(object, value)
 end
 
+function metatable.set_anchor(object, value)
+  object.anchoring = {
+    left = object.x,
+    right = object.parent.width - object.x - object.width,
+    top = object.y,
+    bottom = object.parent.height - object.y - object.height
+  }
+end
+
 function metatable.update_anchor(object)
   local x, y, width, height
   
