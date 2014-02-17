@@ -51,6 +51,8 @@ return function(metatable, object_description)
   end
 
   metatable.set_anchor = function(object, value)
+    check.parameter_type('string', value, object_description, 'anchor')
+    
     object.anchoring = {
       left = object.x,
       right = object.parent.width - object.x - object.width,
