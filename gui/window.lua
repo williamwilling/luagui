@@ -32,11 +32,11 @@ function Window.create()
 end
 
 function Window:add_button()
-  return Button.create(self.wx_panel)
+  return Button.create(self)
 end
 
 function Window:add_text_box()
-  return TextBox.create(self.wx_panel)
+  return TextBox.create(self)
 end
 
 return Window
