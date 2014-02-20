@@ -42,7 +42,7 @@ function unit_test.run()
     
     for _, result in ipairs(unit_test.results) do
       failed_test_count = failed_test_count + 1
-      io.write(string.format('%s:%i: %s\n', result.file, result.line, result.message))
+      io.write(string.format('%s:%i: [%s] %s\n', result.file, result.line, test.name, result.message))
     end
   end
   
