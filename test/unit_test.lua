@@ -3,12 +3,20 @@ local unit_test = {
   assert = {}
 }
 
+local function format_value(value)
+  if type(value) == 'string' then
+    return string.format("'%s'", value)
+  else
+    return tostring(value)
+  end
+end
+
 function unit_test.assert.equal(expected, actual)
   if expected ~= actual then
     local caller_info = debug.getinfo(2)
     
     local result = {}
-    result.message = string.format('expected [%s] but got [%s].', expected, actual)
+    result.message = string.format('expected %s but got %s.', format_value(expected), format_value(actual))
     result.file = string.sub(caller_info.source, 2)
     result.line = caller_info.currentline
     
