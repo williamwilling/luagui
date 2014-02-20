@@ -1,7 +1,8 @@
 local unit_test = {
   tests = {},
   assert = {},
-  deferred = false
+  deferred = false,
+  suites = {}
 }
 
 local function format_value(value)
@@ -58,7 +59,9 @@ function unit_test.set_up(func)
   unit_test.set_up_func = func
 end
 
-function unit_test.run()
+function unit_test.run(suite)
+  table.insert(unit_test.suites, suite)
+    
   if unit_test.deferred then
     return
   end
@@ -67,19 +70,26 @@ function unit_test.run()
   
   local failed_test_count = 0
   
-  for _, test in ipairs(unit_test.tests) do
-    unit_test.results = {}
-    
-    local t = create_test_environment()
-    setfenv(unit_test.set_up_func, t)
-    unit_test.set_up_func()
-    
-    setfenv(test.run, create_test_environment(t))
-    test.run()
-    
-    for _, result in ipairs(unit_test.results) do
-      failed_test_count = failed_test_count + 1
-      io.write(string.format('%s:%i: [%s] %s\n', result.file, result.line, test.name, result.message))
+  for _, suite in ipairs(unit_test.suites) do
+    for test_name, test in pairs(suite) do
+      if test_name ~= 'set_up' and test_name ~= 'tear_down' then
+        unit_test.results = {}
+        
+        if type(suite.set_up) == 'function' then
+          suite.set_up()
+        end
+        
+        test()
+        
+        if type(suite.tear_down) == 'function' then
+          suite.set_up()
+        end
+        
+        for _, result in ipairs(unit_test.results) do
+          failed_test_count = failed_test_count + 1
+          io.write(string.format('%s:%i: [%s] %s\n', result.file, result.line, test_name, result.message))
+        end
+      end
     end
   end
   
