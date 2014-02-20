@@ -12,6 +12,28 @@ local function format_value(value)
   end
 end
 
+local function create_test_environment(t)
+  local environment = {}
+  
+  for k,v in pairs(_G) do
+    if type(v) == 'function' or type(v) == 'table' then
+      environment[k] = v
+    end
+  end
+  
+  for k,v in pairs(unit_test) do
+    if type(v) == 'function' or type(v) == 'table' then
+      environment[k] = v
+    end
+  end
+  
+  for k,v in pairs(t or {}) do
+    environment[k] = v
+  end
+  
+  return environment
+end
+
 function unit_test.assert.equal(expected, actual)
   if expected ~= actual then
     local caller_info = debug.getinfo(2)
@@ -32,6 +54,10 @@ function unit_test.add_test(name, test)
   })
 end
 
+function unit_test.set_up(func)
+  unit_test.set_up_func = func
+end
+
 function unit_test.run()
   if unit_test.deferred then
     return
@@ -43,6 +69,12 @@ function unit_test.run()
   
   for _, test in ipairs(unit_test.tests) do
     unit_test.results = {}
+    
+    local t = create_test_environment()
+    setfenv(unit_test.set_up_func, t)
+    unit_test.set_up_func()
+    
+    setfenv(test.run, create_test_environment(t))
     test.run()
     
     for _, result in ipairs(unit_test.results) do

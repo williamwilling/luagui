@@ -1,11 +1,15 @@
 local unit_test = require 'test.unit_test'
 local assert = unit_test.assert
 local test = unit_test.add_test
+local set_up = unit_test.set_up
 
 require 'gui'
 
+set_up(function()
+  window = gui.create_window()
+end)
+
 test('a window has a size', function()
-  local window = gui.create_window()
   window.width = 500
   window.height = 200
   
@@ -14,7 +18,6 @@ test('a window has a size', function()
 end)
 
 test('a window has a position', function()
-  local window = gui.create_window()
   window.x = 20
   window.y = 120
   
@@ -23,7 +26,6 @@ test('a window has a position', function()
 end)
 
 test('a window has a title', function()
-  local window = gui.create_window()
   window.title = 'my fine gui window'
   
   assert.equal(window.title, 'my fine gui window')
