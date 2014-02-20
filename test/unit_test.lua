@@ -60,6 +60,26 @@ function unit_test.assert.is_true(expression)
   end
 end
 
+function unit_test.assert.called(func)
+  local name, value = debug.getupvalue(func, 1)
+  
+  if name ~= 'counter' or type(value) ~= 'number' then
+    report_assertion_failure('function was not wrapped by unit_test.call_counter.')
+  elseif value == 0 then
+    report_assertion_failure("expected function to have been called, but it wasn't.")
+  end
+end
+
+function unit_test.call_counter(func)
+  local counter = 0
+  local f = func or function() end
+  
+  return function(...)
+    counter = counter + 1
+    return f(...)
+  end
+end
+
 function unit_test.gather()
   unit_test.run = add_test_suite
 end

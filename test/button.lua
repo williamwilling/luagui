@@ -34,14 +34,10 @@ local suite = {
   end,
   
   ['a button raises a click event'] = function()
-    local handler_called = false
-    button.on_click = function()
-      handler_called = true
-    end
-    
+    button.on_click = unit_test.call_counter()
     button:click()
     
-    assert.is_true(handler_called)
+    assert.called(button.on_click)
   end,
   
   ['a button can be anchored'] = function()
