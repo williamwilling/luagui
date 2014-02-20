@@ -16,8 +16,12 @@ local function format_value(value)
   end
 end
 
-local function report_assertion_failure(message, file_name, line_number)
+local function report_assertion_failure(message)
   failed_test_count = failed_test_count + 1
+  
+  local caller_info = debug.getinfo(3)
+  local file_name  = string.sub(caller_info.source, 2)
+  local line_number = caller_info.currentline
   
   io.write(string.format(
       '%s:%i: [%s] %s\n',
@@ -45,13 +49,14 @@ end
 
 function unit_test.assert.equal(expected, actual)
   if expected ~= actual then
-    local caller_info = debug.getinfo(2)
-    
     local message = string.format('expected %s but got %s.', format_value(expected), format_value(actual))
-    local file_name  = string.sub(caller_info.source, 2)
-    local line_number = caller_info.currentline
-    
-    report_assertion_failure(message, file_name, line_number)
+    report_assertion_failure(message)
+  end
+end
+
+function unit_test.assert.is_true(expression)
+  if not expression then
+    report_assertion_failure('expected expression to be true, but was false.')
   end
 end
 
