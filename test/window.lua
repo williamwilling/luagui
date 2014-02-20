@@ -12,3 +12,5 @@ test('window has a size', function()
   assert.equal(500, window.width)
   assert.equal(200, window.height)
 end)
+
+unit_test.run()

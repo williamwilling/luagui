@@ -1,6 +1,7 @@
 local unit_test = {
   tests = {},
-  assert = {}
+  assert = {},
+  deferred = false
 }
 
 local function format_value(value)
@@ -32,6 +33,10 @@ function unit_test.add_test(name, test)
 end
 
 function unit_test.run()
+  if unit_test.deferred then
+    return
+  end
+  
   io.write('\nRunning unit tests...\n')
   
   local failed_test_count = 0
