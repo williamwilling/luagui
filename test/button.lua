@@ -15,29 +15,29 @@ local suite = {
     button.width = 50
     button.height = 25
     
-    assert.equal(50, button.width)
-    assert.equal(25, button.height)
+    assert.are_equal(50, button.width)
+    assert.are_equal(25, button.height)
   end,
   
   ['a button has a position'] = function()
     button.x = 95
     button.y = 66
     
-    assert.equal(95, button.x)
-    assert.equal(66, button.y)
+    assert.are_equal(95, button.x)
+    assert.are_equal(66, button.y)
   end,
   
   ['a button has text'] = function()
     button.text = 'click me'
     
-    assert.equal('click me', button.text)
+    assert.are_equal('click me', button.text)
   end,
   
   ['a button raises a click event'] = function()
-    button.on_click = unit_test.call_counter()
+    button.on_click = unit_test.count_calls_to()
     button:click()
     
-    assert.called(button.on_click)
+    assert.was_called(button.on_click)
   end,
   
   ['a button can be anchored'] = function()
@@ -53,8 +53,8 @@ local suite = {
     window.width = 500
     window.height = 300
     
-    assert.equal(400, button.width)
-    assert.equal(200, button.height)
+    assert.are_equal(400, button.width)
+    assert.are_equal(200, button.height)
   end
 }
 

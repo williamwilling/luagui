@@ -12,10 +12,10 @@ local suite = {
   end,
   
   ['a text box raises a text changed event'] = function()
-    text_box.on_text_changed = unit_test.call_counter()
+    text_box.on_text_changed = unit_test.count_calls_to()
     text_box.text = 'hello'
     
-    assert.called(text_box.on_text_changed)
+    assert.was_calledare_equal(text_box.on_text_changed)
   end,
   
   ['a text box can be anchored to all sides of a window'] = function()
@@ -28,8 +28,8 @@ local suite = {
     window.width = 400
     window.height = 345
     
-    assert.equal(400, text_box.width)
-    assert.equal(345, text_box.height)
+    assert.are_equal(400, text_box.width)
+    assert.are_equal(345, text_box.height)
   end,
   
   ['a text box can be anchored to the top left of a window'] = function()
@@ -44,10 +44,10 @@ local suite = {
     window.width = 160
     window.height = 583
     
-    assert.equal(39, text_box.x)
-    assert.equal(46, text_box.y)
-    assert.equal(100, text_box.width)
-    assert.equal(25, text_box.height)
+    assert.are_equal(39, text_box.x)
+    assert.are_equal(46, text_box.y)
+    assert.are_equal(100, text_box.width)
+    assert.are_equal(25, text_box.height)
   end,
   
   ['a text box can be anchored to the bottom right of a window'] = function()
@@ -62,10 +62,10 @@ local suite = {
     window.width = 200
     window.height = 450
     
-    assert.equal(0, text_box.x)
-    assert.equal(200, text_box.width)
-    assert.equal(250, text_box.y)
-    assert.equal(100, text_box.height)
+    assert.are_equal(0, text_box.x)
+    assert.are_equal(200, text_box.width)
+    assert.are_equal(250, text_box.y)
+    assert.are_equal(100, text_box.height)
   end,
   
   ['a text box can be unanchored from all sides of a window'] = function()
@@ -80,10 +80,10 @@ local suite = {
     window.width = 600
     window.height = 200
     
-    assert.equal(300, text_box.x)
-    assert.equal(200, text_box.width)
-    assert.equal(50, text_box.y)
-    assert.equal(100, text_box.height)
+    assert.are_equal(300, text_box.x)
+    assert.are_equal(200, text_box.width)
+    assert.are_equal(50, text_box.y)
+    assert.are_equal(100, text_box.height)
   end
 }
 

@@ -47,7 +47,7 @@ local function add_test_suite(suite)
   table.insert(unit_test.suites, suite)
 end
 
-function unit_test.assert.equal(expected, actual)
+function unit_test.assert.are_equal(expected, actual)
   if expected ~= actual then
     local message = string.format('expected %s but got %s.', format_value(expected), format_value(actual))
     report_assertion_failure(message)
@@ -60,7 +60,7 @@ function unit_test.assert.is_true(expression)
   end
 end
 
-function unit_test.assert.called(func)
+function unit_test.assert.was_called(func)
   local name, value = debug.getupvalue(func, 1)
   
   if name ~= 'counter' or type(value) ~= 'number' then
@@ -70,7 +70,7 @@ function unit_test.assert.called(func)
   end
 end
 
-function unit_test.call_counter(func)
+function unit_test.count_calls_to(func)
   local counter = 0
   local f = func or function() end
   
