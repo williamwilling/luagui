@@ -28,4 +28,9 @@ function Button.create(parent)
   return button
 end
 
+function Button:click()
+  local event = wx.wxCommandEvent(wx.wxEVT_COMMAND_BUTTON_CLICKED)
+  self.wx:GetEventHandler():ProcessEvent(event)
+end
+
 return Button
