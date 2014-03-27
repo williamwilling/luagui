@@ -1,5 +1,6 @@
 local common = require 'gui.common'
 local Button = require 'gui.button'
+local MenuBar = require 'gui.menu_bar'
 local TextBox = require 'gui.text_box'
 
 local Window = {}
@@ -25,9 +26,12 @@ function Window.create()
     wx.wxDefaultPosition,
     wx.wxDefaultSize)
   
+  window.menu_bar = MenuBar.create()
+  window.wx:SetMenuBar(window.menu_bar.wx)
+  
   window.wx:Show(true)
   
-  setmetatable(window, metatable);
+  setmetatable(window, metatable)
   return window
 end
 
