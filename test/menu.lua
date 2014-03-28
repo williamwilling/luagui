@@ -9,6 +9,13 @@ local suite = {
     local menu = window.menu_bar:add_menu('File')
     
     assert.are_equal('File', menu.text)
+  end,
+  
+  ["a menu's text does not include the ampersand"] = function()
+    local window = gui.create_window()
+    local menu = window.menu_bar:add_menu('&File')
+    
+    assert.are_equal('File', menu.text)
   end
 }
 

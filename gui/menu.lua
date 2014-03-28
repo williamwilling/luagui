@@ -4,7 +4,8 @@ local Menu = {}
 local metatable = common.create_metatable(Menu)
 
 metatable.get_text = function(object)
-  return object.wx:GetTitle()
+  local text = object.wx:GetTitle()
+  return wx.wxMenuItem.GetLabelText(text)
 end
 
 function Menu.create(name)
