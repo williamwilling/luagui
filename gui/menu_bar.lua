@@ -15,7 +15,6 @@ end
 function MenuBar:add_menu(name)
   local menu = Menu.create(name)
   self.wx:Append(menu.wx, name)
-  
   return menu
 end
 

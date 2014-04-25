@@ -15,7 +15,7 @@ local suite = {
     text_box.on_text_changed = unit_test.count_calls_to()
     text_box.text = 'hello'
     
-    assert.was_calledare_equal(text_box.on_text_changed)
+    assert.was_called(text_box.on_text_changed)
   end,
   
   ['a text box can be anchored to all sides of a window'] = function()

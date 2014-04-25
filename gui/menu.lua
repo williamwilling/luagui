@@ -16,4 +16,10 @@ function Menu.create(name)
   return menu
 end
 
+function Menu:add_item(text)
+  local item = MenuItem.create(text)
+  self.wx:Append(item.wx)
+  return item
+end
+
 return Menu

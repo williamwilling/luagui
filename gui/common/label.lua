@@ -3,7 +3,7 @@ local check = require 'gui.check'
 return function(metatable, object_description, property_name)
   property_name = property_name or 'label'
   
-  metatable['get_' .. property_name] = function(object, value)
+  metatable['get_' .. property_name] = function(object)
     return object.wx:GetLabel()
   end
 
