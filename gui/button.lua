@@ -30,7 +30,7 @@ end
 
 function Button:click()
   local event = wx.wxCommandEvent(wx.wxEVT_COMMAND_BUTTON_CLICKED)
-  self.wx:GetEventHandler():ProcessEvent(event)
+  self.wx:ProcessEvent(event)
 end
 
 return Button
