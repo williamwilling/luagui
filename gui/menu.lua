@@ -1,4 +1,5 @@
 local common = require 'gui.common'
+local MenuItem = require 'gui.menu_item'
 
 local Menu = {}
 local metatable = common.create_metatable(Menu)
@@ -17,7 +18,7 @@ function Menu.create(name)
 end
 
 function Menu:add_item(text)
-  local item = MenuItem.create(text)
+  local item = MenuItem.create(self, text)
   self.wx:Append(item.wx)
   return item
 end
