@@ -59,9 +59,8 @@ function OpenFileDialog.create(parent)
   return open_file_dialog
 end
 
-function OpenFileDialog:show()
-  local style = wx.wxFD_OPEN
-  if self.multiselect then
+local function show_dialog(dialog, style)
+  if dialog.multiselect then
     style = style + wx.wxFD_MULTIPLE
   end
   
@@ -70,15 +69,23 @@ function OpenFileDialog:show()
     parent_wx = parent.wx
   end
   
-  local filter = create_filter_string(self.filters)
+  local filter = create_filter_string(dialog.filters)
   
-  local wx_dialog = wx.wxFileDialog(parent_wx, self.title, self.default_folder, self.default_file, filter, style)
+  local wx_dialog = wx.wxFileDialog(parent_wx, dialog.title, dialog.default_folder, dialog.default_file, filter, style)
   
   local result = wx_dialog:ShowModal() == wx.wxID_OK
-  self.file_name = wx_dialog:GetPath()
-  self.file_names = wx_dialog:GetPaths()
+  dialog.file_name = wx_dialog:GetPath()
+  dialog.file_names = wx_dialog:GetPaths()
   
   return result
+end
+
+function OpenFileDialog:open()
+  return show_dialog(self, wx.wxFD_OPEN)
+end
+
+function OpenFileDialog:save()
+  return show_dialog(self, wx.wxFD_SAVE)
 end
 
 return OpenFileDialog
