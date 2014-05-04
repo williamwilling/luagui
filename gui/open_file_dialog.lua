@@ -5,7 +5,8 @@ local metatable = common.create_metatable(OpenFileDialog)
 
 function OpenFileDialog.create(parent)
   local open_file_dialog = {
-    parent = parent
+    parent = parent,
+    multiselect = false
   }
   
   setmetatable(open_file_dialog, metatable)
@@ -14,7 +15,7 @@ end
 
 function OpenFileDialog:show()
   local style = wx.wxFD_OPEN
-  if self.multi_select then
+  if self.multiselect then
     style = style + wx.wxFD_MULTIPLE
   end
   
@@ -26,8 +27,8 @@ function OpenFileDialog:show()
   local wx_dialog = wx.wxFileDialog(parent_wx, '', '', '', '', style)
   
   local result = wx_dialog:ShowModal() == wx.wxID_OK
-  self.fileName = wx_dialog:GetPath()
-  self.fileNames = wx_dialog:GetPaths()
+  self.file_name = wx_dialog:GetPath()
+  self.file_names = wx_dialog:GetPaths()
   
   return result
 end
