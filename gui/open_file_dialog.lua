@@ -3,31 +3,31 @@ local common = require 'gui.common'
 local OpenFileDialog = {}
 local metatable = common.create_metatable(OpenFileDialog)
 
-local function create_wildcard_string(wildcards)
-  if wildcards == nil then
+local function create_filter_string(filters)
+  if filters == nil then
     return ''
   end
 
-  if type(wildcards) ~= 'table' then
-    error('The wildcards-property is not in the correct format.', 3)
+  if type(filters) ~= 'table' then
+    error('The filters are not specified in the correct format.', 3)
   end
   
   local result = ''
 
-  for _, wildcard in ipairs(wildcards) do
-    if type(wildcard) ~= 'table' or #wildcard < 2 then
-      error('The wildcards-property is not in the correct format.', 3)
+  for _, filter in ipairs(filters) do
+    if type(filter) ~= 'table' or #filter < 2 then
+      error('The filters are not specified in the correct format.', 3)
     end
     
-    local description = wildcard[1]
+    local description = filter[1]
     local pattern = ''
     
-    for i = 2, #wildcard do
+    for i = 2, #filter do
       if #pattern > 0 then
         pattern = pattern .. ';'
       end
       
-      pattern = pattern .. wildcard[i]
+      pattern = pattern .. filter[i]
     end
     
     if #result > 0 then
@@ -64,9 +64,9 @@ function OpenFileDialog:show()
     parent_wx = parent.wx
   end
   
-  local wildcard = create_wildcard_string(self.wildcards)
+  local filter = create_filter_string(self.filters)
   
-  local wx_dialog = wx.wxFileDialog(parent_wx, self.title, self.default_folder, self.default_file, wildcard, style)
+  local wx_dialog = wx.wxFileDialog(parent_wx, self.title, self.default_folder, self.default_file, filter, style)
   
   local result = wx_dialog:ShowModal() == wx.wxID_OK
   self.file_name = wx_dialog:GetPath()
