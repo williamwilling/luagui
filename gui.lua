@@ -1,10 +1,15 @@
 require 'wx'
 local Window = require 'gui.window'
+local OpenFileDialog = require 'gui.open_file_dialog'
 
 gui = {}
 
 function gui.create_window()
   return Window.create()
+end
+
+function gui.create_open_file_dialog()
+  return OpenFileDialog.create()
 end
 
 function gui.run()

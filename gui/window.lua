@@ -2,6 +2,7 @@ local common = require 'gui.common'
 local Button = require 'gui.button'
 local MenuBar = require 'gui.menu_bar'
 local TextBox = require 'gui.text_box'
+local OpenFileDialog = require 'gui.open_file_dialog'
 
 local Window = {}
 local metatable = common.create_metatable(Window)
@@ -33,6 +34,10 @@ function Window.create()
   
   setmetatable(window, metatable)
   return window
+end
+
+function Window:create_open_file_dialog()
+  return OpenFileDialog.create(self)
 end
 
 function Window:add_button()
