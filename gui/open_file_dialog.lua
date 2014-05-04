@@ -3,6 +3,10 @@ local common = require 'gui.common'
 local OpenFileDialog = {}
 local metatable = common.create_metatable(OpenFileDialog)
 
+metatable.get_fileName = function(object)
+  return object.wx:GetPath()
+end
+
 function OpenFileDialog.create(parent)
   local open_file_dialog = {
     parent = parent
