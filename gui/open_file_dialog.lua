@@ -43,7 +43,10 @@ end
 function OpenFileDialog.create(parent)
   local open_file_dialog = {
     parent = parent,
-    multiselect = false
+    multiselect = false,
+    title = '',
+    default_folder = '',
+    default_file = ''
   }
   
   setmetatable(open_file_dialog, metatable)
@@ -63,7 +66,7 @@ function OpenFileDialog:show()
   
   local wildcard = create_wildcard_string(self.wildcards)
   
-  local wx_dialog = wx.wxFileDialog(parent_wx, '', '', '', wildcard, style)
+  local wx_dialog = wx.wxFileDialog(parent_wx, self.title, self.default_folder, self.default_file, wildcard, style)
   
   local result = wx_dialog:ShowModal() == wx.wxID_OK
   self.file_name = wx_dialog:GetPath()
