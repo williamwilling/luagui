@@ -3,28 +3,33 @@ local common = require 'gui.common'
 local OpenFileDialog = {}
 local metatable = common.create_metatable(OpenFileDialog)
 
-metatable.get_fileName = function(object)
-  return object.wx:GetPath()
-end
-
 function OpenFileDialog.create(parent)
   local open_file_dialog = {
     parent = parent
   }
-  
-  local parent_wx = wx.NULL
-  if parent ~= nil then
-    parent_wx = parent.wx
-  end
-  
-  open_file_dialog.wx = wx.wxFileDialog(parent_wx, '', '', '', '', wx.wxFD_OPEN)
   
   setmetatable(open_file_dialog, metatable)
   return open_file_dialog
 end
 
 function OpenFileDialog:show()
-  return self.wx:ShowModal() == wx.wxID_OK
+  local style = wx.wxFD_OPEN
+  if self.multi_select then
+    style = style + wx.wxFD_MULTIPLE
+  end
+  
+  local parent_wx = wx.NULL
+  if parent ~= nil then
+    parent_wx = parent.wx
+  end
+  
+  local wx_dialog = wx.wxFileDialog(parent_wx, '', '', '', '', style)
+  
+  local result = wx_dialog:ShowModal() == wx.wxID_OK
+  self.fileName = wx_dialog:GetPath()
+  self.fileNames = wx_dialog:GetPaths()
+  
+  return result
 end
 
 return OpenFileDialog
