@@ -1,7 +1,7 @@
 local common = require 'gui.common'
 
-local OpenFileDialog = {}
-local metatable = common.create_metatable(OpenFileDialog)
+local FileDialog = {}
+local metatable = common.create_metatable(FileDialog)
 
 function metatable.set_filters(object, value)
   if (type(value) ~= 'table' and value ~= nil) then
@@ -46,8 +46,8 @@ local function create_filter_string(filters)
   return result
 end
 
-function OpenFileDialog.create(parent)
-  local open_file_dialog = {
+function FileDialog.create(parent)
+  local file_dialog = {
     parent = parent,
     multiselect = false,
     title = '',
@@ -55,8 +55,8 @@ function OpenFileDialog.create(parent)
     default_file = ''
   }
   
-  setmetatable(open_file_dialog, metatable)
-  return open_file_dialog
+  setmetatable(file_dialog, metatable)
+  return file_dialog
 end
 
 local function show_dialog(dialog, style)
@@ -80,12 +80,12 @@ local function show_dialog(dialog, style)
   return result
 end
 
-function OpenFileDialog:open()
+function FileDialog:open()
   return show_dialog(self, wx.wxFD_OPEN)
 end
 
-function OpenFileDialog:save()
+function FileDialog:save()
   return show_dialog(self, wx.wxFD_SAVE)
 end
 
-return OpenFileDialog
+return FileDialog
