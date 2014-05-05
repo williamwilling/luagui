@@ -7,11 +7,17 @@ common.add_size(metatable, 'text box')
 common.add_anchor(metatable, 'text box')
 common.add_value(metatable, 'text box', 'text')
 
-function create_text_box(text_box, parent)
+local function create_text_box(text_box)
   local style = 0
   
   if text_box.multiline then
     style = style + wx.wxTE_MULTILINE
+  end
+  
+  if text_box.word_wrap then
+    style = style + wx.wxTE_BESTWRAP
+  else
+    style = style + wx.wxTE_DONTWRAP
   end
   
   text_box.wx = wx.wxTextCtrl(
@@ -29,24 +35,37 @@ function create_text_box(text_box, parent)
   text_box.anchor = 'top left'
 end
 
-function metatable.set_multiline(object, value)
-  local values = getmetatable(object)[object]
-  values.multiline = value
+local function recreate_text_box(text_box)
+  local values = getmetatable(text_box)[text_box]
   
   local copy = {}
   for k,v in pairs(values) do
-    if k ~= 'multiline' then
+    if k ~= 'multiline' and k ~= 'word_wrap' then
       copy[k] = v
     end
   end
   
-  local wx = object.wx
-  create_text_box(object)
+  local wx = text_box.wx
+  create_text_box(text_box)
   wx:Destroy()
   
   for k,v in pairs(copy) do
-    object[k] = v
+    text_box[k] = v
   end
+end
+
+function metatable.set_multiline(object, value)
+  local values = getmetatable(object)[object]
+  values.multiline = value
+  
+  recreate_text_box(object)
+end
+
+function metatable.set_word_wrap(object, value)
+  local values = getmetatable(object)[object]
+  values.word_wrap = value
+  
+  recreate_text_box(object)
 end
 
 function TextBox.create(parent)

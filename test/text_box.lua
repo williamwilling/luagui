@@ -84,6 +84,25 @@ local suite = {
     assert.are_equal(200, text_box.width)
     assert.are_equal(50, text_box.y)
     assert.are_equal(100, text_box.height)
+  end,
+  
+  ['enabling word wrap does not change any of the other properties'] = function()
+    text_box.x = 20
+    text_box.y = 30
+    text_box.width = 40
+    text_box.height = 50
+    text_box.anchor = 'bottom right'
+    text_box.multiline = true
+    text_box.text = 'foo bar'
+    text_box.word_wrap = true
+    
+    assert.are_equal(20, text_box.x)
+    assert.are_equal(30, text_box.y)
+    assert.are_equal(40, text_box.width)
+    assert.are_equal(50, text_box.height)
+    assert.are_equal('bottom right', text_box.anchor)
+    assert.are_equal(true, text_box.multiline)
+    assert.are_equal('foo bar', text_box.text)
   end
 }
 
