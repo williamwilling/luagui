@@ -33,9 +33,20 @@ function metatable.set_multiline(object, value)
   local values = getmetatable(object)[object]
   values.multiline = value
   
+  local copy = {}
+  for k,v in pairs(values) do
+    if k ~= 'multiline' then
+      copy[k] = v
+    end
+  end
+  
   local wx = object.wx
   create_text_box(object)
   wx:Destroy()
+  
+  for k,v in pairs(copy) do
+    object[k] = v
+  end
 end
 
 function TextBox.create(parent)
