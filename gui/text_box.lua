@@ -30,7 +30,8 @@ function create_text_box(text_box, parent)
 end
 
 function metatable.set_multiline(object, value)
-  rawset(object, 'multiline', value)
+  local values = getmetatable(object)[object]
+  values.multiline = value
   
   local wx = object.wx
   create_text_box(object)
