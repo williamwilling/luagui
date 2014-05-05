@@ -67,9 +67,10 @@ function common.create_metatable(class)
         return self[object][key]
       end
       
-      -- If there is no getter and no setter for the specified key, then it's
-      -- business as usual and we shouldn't interfere.
-      return rawget(object, key)
+      -- If there is no getter and no setter for the specified key, we should
+      -- treat the object as a normal table. If the object doesn't contain the
+      -- specified key, look up the key in the object's class.
+      return rawget(object, key) or class[key]
     end
   }
 end
