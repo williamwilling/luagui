@@ -16,7 +16,7 @@ local function create_text_box(text_box)
   
   if text_box.word_wrap then
     style = style + wx.wxTE_BESTWRAP
-  else
+  elseif text_box.multiline then
     style = style + wx.wxTE_DONTWRAP
   end
   
