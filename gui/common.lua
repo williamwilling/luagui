@@ -1,5 +1,6 @@
 local common = {}
 common.add_position = require 'gui.common.position'
+common.add_client_size = require 'gui.common.client_size'
 common.add_size = require 'gui.common.size'
 common.add_label = require 'gui.common.label'
 common.add_value = require 'gui.common.value'

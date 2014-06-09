@@ -7,7 +7,7 @@ local FileDialog = require 'gui.file_dialog'
 local Window = {}
 local metatable = common.create_metatable(Window)
 common.add_position(metatable, 'window')
-common.add_size(metatable, 'window')
+common.add_client_size(metatable, 'window')
 common.add_label(metatable, 'window', 'title')
 
 function Window.create()

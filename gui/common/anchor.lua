@@ -100,6 +100,9 @@ return function(metatable, object_description)
     end
     
     object.wx:Move(x, y)
-    object.wx:SetClientSize(width, height)
+    object.wx:SetSize(width, height)  -- NOTE: this line assumes that anchored controls are always
+                                      -- sized based on the entire control, not just the client
+                                      -- area. If this ever becomes not true, we'll have to figure
+                                      -- out whether to call SetSize() or SetClientSize().
   end
 end
