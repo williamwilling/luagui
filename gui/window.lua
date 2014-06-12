@@ -48,4 +48,8 @@ function Window:add_text_box()
   return TextBox.create(self)
 end
 
+function Window:close()
+  self.wx:Close()
+end
+
 return Window
