@@ -5,6 +5,7 @@ common.add_size = require 'gui.common.size'
 common.add_label = require 'gui.common.label'
 common.add_value = require 'gui.common.value'
 common.add_anchor = require 'gui.common.anchor'
+common.add_color = require 'gui.common.color'
 
 function common.create_metatable(class)
   return {
