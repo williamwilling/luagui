@@ -6,6 +6,7 @@ common.add_position(metatable, 'text box')
 common.add_size(metatable, 'text box')
 common.add_anchor(metatable, 'text box')
 common.add_value(metatable, 'text box', 'text')
+common.add_color(metatable, 'text_box')
 
 local function create_text_box(text_box)
   local style = 0
