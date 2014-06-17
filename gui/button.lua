@@ -7,6 +7,7 @@ common.add_size(metatable, 'button')
 common.add_label(metatable, 'button', 'text')
 common.add_anchor(metatable, 'button')
 common.add_color(metatable, 'button')
+common.add_text_color(metatable, 'button')
 
 function Button.create(parent)
   local button = {
