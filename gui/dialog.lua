@@ -1,5 +1,6 @@
 local common = require 'gui.common'
 local Button = require 'gui.button'
+local Label = require 'gui.label'
 local TextBox = require 'gui.text_box'
 
 local Dialog = {}
@@ -32,6 +33,10 @@ end
 
 function Dialog:add_button()
   return Button.create(self)
+end
+
+function Dialog:add_label()
+  return Label.create(self)
 end
 
 function Dialog:add_text_box()
