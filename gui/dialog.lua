@@ -10,10 +10,13 @@ common.add_label(metatable, 'dialog box', 'title')
 common.add_color(metatable, 'dialog box')
 
 function Dialog.create(parent)
-  local dialog = {}
+  local dialog = {
+    parent = parent
+  }
   
-  dialog.wx = wx.wxDialog(
-    parent.wx,
+  dialog.wx = wx.wxDialog()
+  dialog.wx:Create(
+    dialog.parent.wx,
     wx.wxID_ANY,
     '')
   
