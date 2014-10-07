@@ -3,6 +3,7 @@ local common = require 'gui.common'
 local Label = {}
 local metatable = common.create_metatable(Label)
 common.add_position(metatable, 'label')
+common.add_size(metatable, 'label')
 common.add_label(metatable, 'label', 'text')
 
 function Label.create(parent)
