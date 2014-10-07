@@ -3,12 +3,12 @@ local common = require 'gui.common'
 local Image = {}
 local metatable = common.create_metatable(Image)
 common.add_position(metatable, 'image')
+common.add_size(metatable, 'image')
+common.add_anchor(metatable, 'image')
 
 metatable.set_file = function(object, value)
-  local image = wx.wxImage(value)
-  object.bitmap = wx.wxBitmap(image)
-  
-  object.wx:SetClientSize(image:GetWidth(), image:GetHeight())
+  object.image = wx.wxImage(value)
+  object.wx:SetSize(object.image:GetWidth(), object.image:GetHeight())
   
   return value
 end
@@ -24,17 +24,25 @@ function Image.create(parent)
     wx.wxDefaultPosition,
     wx.wxDefaultSize)
   
+  parent.wx:Connect(wx.wxEVT_SIZE, function(event)
+    metatable.update_anchor(image)
+    image.wx:Refresh()
+    event:Skip()
+  end)
+
   image.wx:Connect(wx.wxEVT_PAINT, function(event)
     local dc = wx.wxPaintDC(image.wx)
     
-    if image.bitmap ~= nil then
-      dc:DrawBitmap(image.bitmap, 0, 0, false)
+    if image.image ~= nil then
+      local bitmap = wx.wxBitmap(image.image:Scale(image.width, image.height))  
+      dc:DrawBitmap(bitmap, 0, 0, false)
     end
     
     dc:delete()
   end)
   
   setmetatable(image, metatable)
+  image.anchor = 'top left'
   
   return image
 end
