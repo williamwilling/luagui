@@ -31,14 +31,15 @@ function Image.create(parent)
   end)
 
   image.wx:Connect(wx.wxEVT_PAINT, function(event)
-    local dc = wx.wxPaintDC(image.wx)
-    
     if image.image ~= nil then
+      local dc = wx.wxPaintDC(image.wx)
+      
       local bitmap = wx.wxBitmap(image.image:Scale(image.width, image.height))  
       dc:DrawBitmap(bitmap, 0, 0, false)
+      
+      bitmap:delete()
+      dc:delete()
     end
-    
-    dc:delete()
   end)
   
   setmetatable(image, metatable)
