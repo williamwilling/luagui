@@ -78,10 +78,11 @@ function common.create_metatable(class)
   }
 end
 
-function common.add_event(object, event_name, wx_event)
-  local trigger_event = function()
+function common.add_event(object, event_name, wx_event, ...)
+  local params = { ... }
+  local trigger_event = function(event)
     if type(object[event_name]) == 'function' then
-      object[event_name](object)
+      object[event_name](object, unpack(params))
     end
   end
   

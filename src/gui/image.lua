@@ -41,6 +41,13 @@ function Image.create(parent)
       dc:delete()
     end
   end)
+
+  common.add_event(image, 'on_mouse_up', wx.wxEVT_LEFT_UP, 'left')
+  common.add_event(image, 'on_mouse_up', wx.wxEVT_RIGHT_UP, 'right')
+  common.add_event(image, 'on_mouse_up', wx.wxEVT_MIDDLE_UP, 'middle')
+  common.add_event(image, 'on_mouse_down', wx.wxEVT_LEFT_DOWN, 'left')
+  common.add_event(image, 'on_mouse_down', wx.wxEVT_RIGHT_DOWN, 'right')
+  common.add_event(image, 'on_mouse_down', wx.wxEVT_MIDDLE_DOWN, 'middle')
   
   setmetatable(image, metatable)
   image.anchor = 'top left'
