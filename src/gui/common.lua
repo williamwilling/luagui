@@ -82,7 +82,11 @@ function common.add_event(object, event_name, wx_event, ...)
   local params = { ... }
   local trigger_event = function(event)
     if type(object[event_name]) == 'function' then
-      object[event_name](object, unpack(params))
+      if type(params[1]) == 'function' then
+        object[event_name](object, params[1](event))
+      else
+        object[event_name](object, unpack(params))
+      end
     end
   end
   

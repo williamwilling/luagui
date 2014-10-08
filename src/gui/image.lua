@@ -48,6 +48,11 @@ function Image.create(parent)
   common.add_event(image, 'on_mouse_down', wx.wxEVT_LEFT_DOWN, 'left')
   common.add_event(image, 'on_mouse_down', wx.wxEVT_RIGHT_DOWN, 'right')
   common.add_event(image, 'on_mouse_down', wx.wxEVT_MIDDLE_DOWN, 'middle')
+  common.add_event(image, 'on_mouse_move', wx.wxEVT_MOTION, function(event)
+    return event:GetX(), event:GetY()
+  end)
+  common.add_event(image, 'on_mouse_enter', wx.wxEVT_ENTER_WINDOW)
+  common.add_event(image, 'on_mouse_leave', wx.wxEVT_LEAVE_WINDOW)
   
   setmetatable(image, metatable)
   image.anchor = 'top left'
