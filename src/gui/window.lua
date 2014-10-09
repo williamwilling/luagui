@@ -5,6 +5,7 @@ local MenuBar = require 'gui.menu_bar'
 local TextBox = require 'gui.text_box'
 local Dialog = require 'gui.dialog'
 local FileDialog = require 'gui.file_dialog'
+local Image = require 'gui.image'
 
 local Window = {}
 local metatable = common.create_metatable(Window)
@@ -59,6 +60,10 @@ end
 
 function Window:add_label()
   return Label.create(self)
+end
+
+function Window:add_image()
+  return Image.create(self)
 end
 
 function Window:add_text_box()
