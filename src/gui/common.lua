@@ -104,6 +104,12 @@ function common.propagate_events(object)
   end
   
   object.wx:Connect(wx.wxEVT_MOTION, propagate)
+  object.wx:Connect(wx.wxEVT_LEFT_UP, propagate)
+  object.wx:Connect(wx.wxEVT_LEFT_DOWN, propagate)
+  object.wx:Connect(wx.wxEVT_MIDDLE_UP, propagate)
+  object.wx:Connect(wx.wxEVT_MIDDLE_DOWN, propagate)
+  object.wx:Connect(wx.wxEVT_RIGHT_UP, propagate)
+  object.wx:Connect(wx.wxEVT_RIGHT_DOWN, propagate)
 end
 
 function common.add_mouse_events(object)
