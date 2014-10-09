@@ -33,6 +33,12 @@ function Window.create()
   window.menu_bar = MenuBar.create()
   window.wx:SetMenuBar(window.menu_bar.wx)
   
+  window.wx_panel:Connect(wx.wxEVT_SIZE, function()
+    if type(window.on_resize) == 'function' then
+      window:on_resize()
+    end
+  end)
+  
   window.wx:Show(true)
   
   setmetatable(window, metatable)
