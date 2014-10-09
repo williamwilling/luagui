@@ -22,6 +22,7 @@ function Button.create(parent)
     wx.wxDefaultSize)
   
   common.propagate_events(button)
+  common.add_mouse_events(button)
   common.add_event(button, 'on_click', wx.wxEVT_COMMAND_BUTTON_CLICKED)
   parent.wx:Connect(wx.wxEVT_SIZE, function(event) metatable.update_anchor(button) event:Skip() end)
   
