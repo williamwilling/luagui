@@ -90,7 +90,28 @@ function common.add_event(object, event_name, wx_event, ...)
     end
   end
   
-  object.wx:Connect(wx_event, trigger_event)
+  if object.wx_panel then
+    object.wx_panel:Connect(wx_event, trigger_event)
+  else
+    object.wx:Connect(wx_event, trigger_event)
+  end
+end
+
+function common.add_mouse_events(object)
+  common.add_event(object, 'on_mouse_up', wx.wxEVT_LEFT_UP, 'left')
+  common.add_event(object, 'on_mouse_up', wx.wxEVT_RIGHT_UP, 'right')
+  common.add_event(object, 'on_mouse_up', wx.wxEVT_MIDDLE_UP, 'middle')
+  common.add_event(object, 'on_mouse_down', wx.wxEVT_LEFT_DOWN, 'left')
+  common.add_event(object, 'on_mouse_down', wx.wxEVT_RIGHT_DOWN, 'right')
+  common.add_event(object, 'on_mouse_down', wx.wxEVT_MIDDLE_DOWN, 'middle')
+  common.add_event(object, 'on_mouse_enter', wx.wxEVT_ENTER_WINDOW)
+  common.add_event(object, 'on_mouse_leave', wx.wxEVT_LEAVE_WINDOW)
+  common.add_event(object, 'on_mouse_move', wx.wxEVT_MOTION, function(event)
+    print(object)
+    event:ResumePropagation(1)
+    event:Skip()
+    return event:GetX(), event:GetY()
+  end)
 end
 
 return common

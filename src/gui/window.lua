@@ -36,6 +36,8 @@ function Window.create()
   
   window.wx:Show(true)
   
+  common.add_mouse_events(window)
+  
   setmetatable(window, metatable)
   return window
 end
