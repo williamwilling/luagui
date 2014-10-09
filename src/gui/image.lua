@@ -42,6 +42,7 @@ function Image.create(parent)
     end
   end)
 
+  common.propagate_events(image)
   common.add_mouse_events(image)
   
   setmetatable(image, metatable)

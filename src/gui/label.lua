@@ -18,6 +18,8 @@ function Label.create(parent)
     wx.wxDefaultSize
   )
   
+  common.propagate_events(label)
+  
   setmetatable(label, metatable)
   label.anchor = 'top left'
   

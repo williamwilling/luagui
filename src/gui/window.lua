@@ -36,6 +36,22 @@ function Window.create()
   
   window.wx:Show(true)
   
+  -- Since event propagation for mouse events doesn't work properly in wxLua, the window has
+  -- to take care of raising mouse events on interested controls.
+  window.wx_panel:Connect(wx.wxEVT_MOTION, function(event)
+    for _, mouse_listener in ipairs(common.mouse_listeners) do
+      if mouse_listener.on_mouse_move ~= nil then
+        local x, y = mouse_listener.wx:ScreenToClient(wx.wxGetMousePosition()):GetXY()
+        local width = mouse_listener.wx:GetSize():GetWidth()
+        local height = mouse_listener.wx:GetSize():GetHeight()
+        
+        if x >= 0 and y >= 0 and x < width and y < height then
+          mouse_listener:on_mouse_move(x, y)
+        end
+      end
+    end
+  end)
+
   common.add_mouse_events(window)
   
   setmetatable(window, metatable)
