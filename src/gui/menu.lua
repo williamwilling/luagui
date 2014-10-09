@@ -16,6 +16,7 @@ local function on_item_select(event_args)
   local menu_item = menu_items[menu_item_id]
   
   if menu_item ~= nil and type(menu_item.on_select) == 'function' then
+    menu_item.checked = not menu_item.checked   -- prevent wxWidgets from changing the state automatically
     menu_item:on_select()
   end
 end

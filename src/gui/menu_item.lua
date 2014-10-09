@@ -7,12 +7,20 @@ metatable.get_text = function(object)
   return object.wx:GetItemLabelText()
 end
 
+metatable.get_checked = function(object)
+  return object.wx:IsChecked()
+end
+
+metatable.set_checked = function(object, value)
+  return object.wx:Check(value)
+end
+
 function MenuItem.create(parent, text)
   local menu_item = {
     parent = parent
   }
 
-  menu_item.wx = wx.wxMenuItem(parent.wx, wx.wxID_ANY, text)
+  menu_item.wx = wx.wxMenuItem(parent.wx, wx.wxID_ANY, text, '', wx.wxITEM_CHECK)
 
   setmetatable(menu_item, metatable)
   return menu_item
