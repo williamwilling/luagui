@@ -1,6 +1,7 @@
 require 'wx'
 local Window = require 'gui.window'
 local FileDialog = require 'gui.file_dialog'
+local Timer = require 'gui.timer'
 
 gui = {
   mouse = require 'gui.mouse'
@@ -12,6 +13,10 @@ end
 
 function gui.create_file_dialog()
   return FileDialog.create()
+end
+
+function gui.create_timer()
+  return Timer.create()
 end
 
 function gui.run()
