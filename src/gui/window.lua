@@ -58,13 +58,19 @@ function Window.create()
     end
   end
   
-  window.wx_panel:Connect(wx.wxEVT_MOTION, send_mouse_event(wx.wxEVT_MOTION, 'on_mouse_move'))
   window.wx_panel:Connect(wx.wxEVT_LEFT_UP, send_mouse_event(wx.wxEVT_LEFT_DOWN, 'on_mouse_up', 'left'))
   window.wx_panel:Connect(wx.wxEVT_LEFT_DOWN, send_mouse_event(wx.wxEVT_LEFT_DOWN, 'on_mouse_down', 'left'))
   window.wx_panel:Connect(wx.wxEVT_MIDDLE_UP, send_mouse_event(wx.wxEVT_MIDDLE_DOWN, 'on_mouse_up', 'middle'))
   window.wx_panel:Connect(wx.wxEVT_MIDDLE_DOWN, send_mouse_event(wx.wxEVT_MIDDLE_DOWN, 'on_mouse_down', 'middle'))
   window.wx_panel:Connect(wx.wxEVT_RIGHT_UP, send_mouse_event(wx.wxEVT_RIGHT_DOWN, 'on_mouse_up', 'right'))
   window.wx_panel:Connect(wx.wxEVT_RIGHT_DOWN, send_mouse_event(wx.wxEVT_RIGHT_DOWN, 'on_mouse_down', 'right'))
+  
+  -- Tell the global mouse object its coordinates relative to this window. Otherwise, the mouse
+  -- object can only know the screen coordinates.
+  window.wx_panel:Connect(wx.wxEVT_MOTION, function(event)
+    gui.mouse.x, gui.mouse.y = window.wx:ScreenToClient(wx.wxGetMousePosition()):GetXY()
+    send_mouse_event(wx.wxEVT_MOTION, 'on_mouse_move')(event)
+  end)
 
   common.add_mouse_events(window)
   
