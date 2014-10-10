@@ -90,7 +90,36 @@ function common.add_event(object, event_name, wx_event, ...)
     end
   end
   
-  object.wx:Connect(wx_event, trigger_event)
+  if object.wx_panel then
+    object.wx_panel:Connect(wx_event, trigger_event)
+  else
+    object.wx:Connect(wx_event, trigger_event)
+  end
+end
+
+function common.propagate_events(object, wx_events)
+  local propagate = function(event)
+    event:ResumePropagation(1)
+    event:Skip()
+  end
+  
+  wx_events = wx_events or {
+    wx.wxEVT_MOTION,
+    wx.wxEVT_LEFT_DOWN,
+    wx.wxEVT_LEFT_UP,
+    wx.wxEVT_MIDDLE_DOWN,
+    wx.wxEVT_MIDDLE_UP,
+    wx.wxEVT_RIGHT_UP,
+    wx.wxEVT_RIGHT_DOWN }
+  
+  for _, wx_event in ipairs(wx_events) do
+    object.wx:Connect(wx_event, propagate)
+  end
+end
+
+function common.add_mouse_events(object)
+  common.mouse_listeners = common.mouse_listeners or {}
+  table.insert(common.mouse_listeners, object)
 end
 
 return common

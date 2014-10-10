@@ -2,7 +2,9 @@ require 'wx'
 local Window = require 'gui.window'
 local FileDialog = require 'gui.file_dialog'
 
-gui = {}
+gui = {
+  mouse = require 'gui.mouse'
+}
 
 function gui.create_window()
   return Window.create()

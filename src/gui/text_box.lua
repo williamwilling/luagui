@@ -30,6 +30,8 @@ local function create_text_box(text_box)
     wx.wxDefaultSize,
     style or 0)
   
+  common.propagate_events(text_box)
+  common.add_mouse_events(text_box)
   common.add_event(text_box, 'on_text_changed', wx.wxEVT_COMMAND_TEXT_UPDATED)
   text_box.parent.wx:Connect(wx.wxEVT_SIZE, function(event) metatable.update_anchor(text_box) event:Skip() end)
   

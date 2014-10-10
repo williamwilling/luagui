@@ -19,6 +19,9 @@ function Label.create(parent)
     wx.wxDefaultSize
   )
   
+  common.propagate_events(label)
+  common.add_mouse_events(label)
+  
   setmetatable(label, metatable)
   label.anchor = 'top left'
   
