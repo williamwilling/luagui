@@ -1,9 +1,7 @@
 local common = require 'gui.common'
 
-local timers = {}
 local Timer = {}
-local metatable = common.create_metatable(Timer)
-
+local timers = {}
 local stop_watch
 
 local function initialize()
@@ -11,6 +9,10 @@ local function initialize()
   stop_watch:Start()
   
   wx:wxGetApp():Connect(wx.wxEVT_IDLE, function(event)
+    if #timers == 0 then
+      return
+    end
+      
     local current_time = stop_watch:Time()
     
     for _, timer in ipairs(timers) do
@@ -34,8 +36,20 @@ function Timer.create()
     interval = 1,
     last_time = stop_watch:Time()
   }
+  
+  function timer:start()
+    table.insert(timers, self)
+  end
+  
+  function timer:stop()
+    for i, t in ipairs(timers) do
+      if t == timer then
+        table.remove(timers, i)
+        break
+      end
+    end
+  end
 
-  table.insert(timers, timer)
   return timer
 end
 
