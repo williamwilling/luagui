@@ -97,19 +97,24 @@ function common.add_event(object, event_name, wx_event, ...)
   end
 end
 
-function common.propagate_events(object)
+function common.propagate_events(object, wx_events)
   local propagate = function(event)
     event:ResumePropagation(1)
     event:Skip()
   end
   
-  object.wx:Connect(wx.wxEVT_MOTION, propagate)
-  object.wx:Connect(wx.wxEVT_LEFT_UP, propagate)
-  object.wx:Connect(wx.wxEVT_LEFT_DOWN, propagate)
-  object.wx:Connect(wx.wxEVT_MIDDLE_UP, propagate)
-  object.wx:Connect(wx.wxEVT_MIDDLE_DOWN, propagate)
-  object.wx:Connect(wx.wxEVT_RIGHT_UP, propagate)
-  object.wx:Connect(wx.wxEVT_RIGHT_DOWN, propagate)
+  wx_events = wx_events or {
+    wx.wxEVT_MOTION,
+    wx.wxEVT_LEFT_DOWN,
+    wx.wxEVT_LEFT_UP,
+    wx.wxEVT_MIDDLE_DOWN,
+    wx.wxEVT_MIDDLE_UP,
+    wx.wxEVT_RIGHT_UP,
+    wx.wxEVT_RIGHT_DOWN }
+  
+  for _, wx_event in ipairs(wx_events) do
+    object.wx:Connect(wx_event, propagate)
+  end
 end
 
 function common.add_mouse_events(object)
