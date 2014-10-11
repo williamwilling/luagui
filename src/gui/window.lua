@@ -45,6 +45,8 @@ function Window.create()
   common.forward_mouse_events(window)
   common.add_mouse_events(window)
   common.add_keyboard_events(window)
+  common.add_event(window, 'on_resize', wx.wxEVT_SIZE)
+  common.add_event(window, 'on_move', wx.wxEVT_MOVE)
   
   setmetatable(window, metatable)
   return window

@@ -96,7 +96,7 @@ function common.add_event(object, event_name, wx_event, ...)
     end
   end
   
-  if object.wx_panel then
+  if object.wx_panel and wx_event ~= wx.wxEVT_MOVE then
     object.wx_panel:Connect(wx_event, trigger_event)
   else
     object.wx:Connect(wx_event, trigger_event)
