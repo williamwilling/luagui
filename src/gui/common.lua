@@ -1,3 +1,5 @@
+local Keyboard = require 'gui.keyboard'
+
 local common = {}
 common.add_position = require 'gui.common.position'
 common.add_client_size = require 'gui.common.client_size'
@@ -110,7 +112,9 @@ function common.propagate_events(object, wx_events)
     wx.wxEVT_MIDDLE_DOWN,
     wx.wxEVT_MIDDLE_UP,
     wx.wxEVT_RIGHT_UP,
-    wx.wxEVT_RIGHT_DOWN }
+    wx.wxEVT_RIGHT_DOWN,
+    wx.wxEVT_KEY_UP,
+    wx.wxEVT_KEY_DOWN }
   
   for _, wx_event in ipairs(wx_events) do
     object.wx:Connect(wx_event, propagate)
@@ -120,6 +124,26 @@ end
 function common.add_mouse_events(object)
   common.mouse_listeners = common.mouse_listeners or {}
   table.insert(common.mouse_listeners, object)
+end
+
+function common.add_keyboard_events(object)
+  local function process_keyboard_event(event)
+    local key = event:GetKeyCode()
+    local modifiers = {
+      shift = event:ShiftDown(),
+      ctrl = event:ControlDown(),
+      alt = event:AltDown(),
+      windows = event:MetaDown(),
+      apple = event:MetaDown(),
+      cmd = event:CmdDown(),
+    }
+    modifiers.any = shift or ctrl or alt or windows or apple or cmd
+    
+    return Keyboard.key_names[key], modifiers
+  end
+  
+  common.add_event(object, 'on_key_up', wx.wxEVT_KEY_UP, process_keyboard_event)
+  common.add_event(object, 'on_key_down', wx.wxEVT_KEY_DOWN, process_keyboard_event)
 end
 
 return common

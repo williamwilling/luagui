@@ -79,6 +79,7 @@ function Window.create()
   end)
 
   common.add_mouse_events(window)
+  common.add_keyboard_events(window)
   
   setmetatable(window, metatable)
   return window
