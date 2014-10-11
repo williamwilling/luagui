@@ -83,9 +83,9 @@ end
 function common.add_event(object, event_name, wx_event, ...)
   local params = { ... }
   local trigger_event = function(event)
-    if wx_event == wx.wxEVT_KEY_DOWN then
+    --if wx_event == wx.wxEVT_KEY_DOWN then
       event:Skip()
-    end
+    --end
     
     if type(object[event_name]) == 'function' then
       if type(params[1]) == 'function' then
@@ -155,6 +155,8 @@ function common.forward_mouse_events(object)
   -- to take care of raising mouse events on interested controls.
   local function send_mouse_event(wx_event, handler_name, param)
     return function(event)
+      event:Skip()
+      
       for _, mouse_listener in ipairs(common.mouse_listeners) do
         if mouse_listener[handler_name] ~= nil then
           local x, y = mouse_listener.wx:ScreenToClient(wx.wxGetMousePosition()):GetXY()
