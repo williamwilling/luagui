@@ -4,7 +4,8 @@ local FileDialog = require 'gui.file_dialog'
 local Timer = require 'gui.timer'
 
 gui = {
-  mouse = require 'gui.mouse'
+  mouse = require 'gui.mouse',
+  keyboard = require 'gui.keyboard'
 }
 
 function gui.create_window()

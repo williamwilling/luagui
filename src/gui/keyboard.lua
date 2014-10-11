@@ -1,5 +1,27 @@
 local Keyboard = {}
 
+Keyboard.key_up = {}
+setmetatable(Keyboard.key_up, {
+  __index = function(table, key)
+    local key_code = Keyboard.key_codes[key]
+    
+    if key_code then
+      return not wx.wxGetKeyState(key_code)
+    end
+  end
+})
+
+Keyboard.key_down = {}
+setmetatable(Keyboard.key_down, {
+  __index = function(table, key)
+    local key_code = Keyboard.key_codes[key]
+    
+    if key_code then
+      return wx.wxGetKeyState(key_code)
+    end
+  end
+})
+
 Keyboard.key_names = {
   [wx.WXK_BACK] = 'backspace',
   [wx.WXK_TAB] = 'tab',
@@ -113,5 +135,11 @@ Keyboard.key_names = {
   [46] = '.',
   [47] = '/'
 }
+
+Keyboard.key_codes = {}
+
+for code, name in pairs(Keyboard.key_names) do
+  Keyboard.key_codes[name] = code
+end
 
 return Keyboard
