@@ -83,6 +83,10 @@ end
 function common.add_event(object, event_name, wx_event, ...)
   local params = { ... }
   local trigger_event = function(event)
+    if wx_event == wx.wxEVT_KEY_DOWN then
+      event:Skip()
+    end
+    
     if type(object[event_name]) == 'function' then
       if type(params[1]) == 'function' then
         object[event_name](object, params[1](event))
