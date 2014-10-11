@@ -31,6 +31,8 @@ function Dialog.create(parent)
   common.forward_mouse_events(dialog)
   common.add_mouse_events(dialog)
   common.add_keyboard_events(dialog)
+  common.add_event(dialog, 'on_resize', wx.wxEVT_SIZE)
+  common.add_event(dialog, 'on_move', wx.wxEVT_MOVE)
   
   setmetatable(dialog, metatable)
   return dialog
