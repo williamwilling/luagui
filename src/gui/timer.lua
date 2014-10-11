@@ -16,10 +16,10 @@ local function initialize()
     local current_time = stop_watch:Time()
     
     for _, timer in ipairs(timers) do
-      local delta_time = current_time - timer.last_time
+      local delta_time = (current_time - timer.last_time)
       if type(timer.on_tick) == 'function' and delta_time >= timer.interval * 1000 then
         timer.last_time = current_time
-        timer:on_tick(delta_time)
+        timer:on_tick(delta_time / 1000)
       end
     end
   
