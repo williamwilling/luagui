@@ -28,6 +28,10 @@ function Dialog.create(parent)
     wx.wxDefaultPosition,
     wx.wxDefaultSize)
   
+  common.forward_mouse_events(dialog)
+  common.add_mouse_events(dialog)
+  common.add_keyboard_events(dialog)
+  
   setmetatable(dialog, metatable)
   return dialog
 end

@@ -42,42 +42,7 @@ function Window.create()
   
   window.wx:Show(true)
   
-  -- Since event propagation for mouse events doesn't work properly in wxLua, the window has
-  -- to take care of raising mouse events on interested controls.
-  local function send_mouse_event(wx_event, handler_name, param)
-    return function(event)
-      for _, mouse_listener in ipairs(common.mouse_listeners) do
-        if mouse_listener[handler_name] ~= nil then
-          local x, y = mouse_listener.wx:ScreenToClient(wx.wxGetMousePosition()):GetXY()
-          local width = mouse_listener.wx:GetSize():GetWidth()
-          local height = mouse_listener.wx:GetSize():GetHeight()
-          
-          if x >= 0 and y >= 0 and x < width and y < height then
-            if param == nil then
-              mouse_listener[handler_name](mouse_listener, x, y)
-            else
-              mouse_listener[handler_name](mouse_listener, param, x, y)
-            end
-          end
-        end
-      end
-    end
-  end
-  
-  window.wx_panel:Connect(wx.wxEVT_LEFT_UP, send_mouse_event(wx.wxEVT_LEFT_DOWN, 'on_mouse_up', 'left'))
-  window.wx_panel:Connect(wx.wxEVT_LEFT_DOWN, send_mouse_event(wx.wxEVT_LEFT_DOWN, 'on_mouse_down', 'left'))
-  window.wx_panel:Connect(wx.wxEVT_MIDDLE_UP, send_mouse_event(wx.wxEVT_MIDDLE_DOWN, 'on_mouse_up', 'middle'))
-  window.wx_panel:Connect(wx.wxEVT_MIDDLE_DOWN, send_mouse_event(wx.wxEVT_MIDDLE_DOWN, 'on_mouse_down', 'middle'))
-  window.wx_panel:Connect(wx.wxEVT_RIGHT_UP, send_mouse_event(wx.wxEVT_RIGHT_DOWN, 'on_mouse_up', 'right'))
-  window.wx_panel:Connect(wx.wxEVT_RIGHT_DOWN, send_mouse_event(wx.wxEVT_RIGHT_DOWN, 'on_mouse_down', 'right'))
-  
-  -- Tell the global mouse object its coordinates relative to this window. Otherwise, the mouse
-  -- object can only know the screen coordinates.
-  window.wx_panel:Connect(wx.wxEVT_MOTION, function(event)
-    gui.mouse.x, gui.mouse.y = window.wx:ScreenToClient(wx.wxGetMousePosition()):GetXY()
-    send_mouse_event(wx.wxEVT_MOTION, 'on_mouse_move')(event)
-  end)
-
+  common.forward_mouse_events(window)
   common.add_mouse_events(window)
   common.add_keyboard_events(window)
   
