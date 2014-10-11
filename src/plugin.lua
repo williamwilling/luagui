@@ -183,14 +183,14 @@ local api = {
         },
         
         show_modal = {
-          type = 'value',
+          type = 'method',
           description = "Shows the dialog. While the dialog is visible, the user can't activate the parent window.",
           args = '()',
           returns = '()'
         },
         
         show_modeless = {
-          type = 'value',
+          type = 'method',
           description = 'Shows the dialog. The user can still activate the parent window while the dialog is visible.',
           args = '()',
           returns = '()'
