@@ -12,9 +12,9 @@ function MenuBar.create()
   return menuBar
 end
 
-function MenuBar:add_menu(name)
-  local menu = Menu.create(name)
-  self.wx:Append(menu.wx, name)
+function MenuBar:add_menu(text)
+  local menu = Menu.create(text)
+  self.wx:Append(menu.wx, text)
   return menu
 end
 
