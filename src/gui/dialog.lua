@@ -6,27 +6,11 @@ local TextBox = require 'gui.text_box'
 
 local Dialog = {}
 local metatable = common.create_metatable(Dialog)
-common.add_position(metatable, 'dialog box')
-common.add_client_size(metatable, 'dialog box')
-common.add_label(metatable, 'dialog box', 'title')
-common.add_color(metatable, 'dialog box')
-
-function metatable.set_resizable(object, value)
-  local width = object.width
-  local height = object.height
-  
-  if value then
-    object.wx:SetWindowStyleFlag(wx.wxDEFAULT_DIALOG_STYLE + wx.wxRESIZE_BORDER)
-  else
-    object.wx:SetWindowStyleFlag(wx.wxDEFAULT_DIALOG_STYLE)
-  end
-  
-  object.wx:Refresh()
-  object.width = width
-  object.height = height
-  
-  return value
-end
+common.add_position(metatable, 'dialog')
+common.add_client_size(metatable, 'dialog')
+common.add_label(metatable, 'dialog', 'title')
+common.add_color(metatable, 'dialog')
+common.add_resizable(metatable, 'dialog')
 
 function Dialog.create(parent)
   local dialog = {

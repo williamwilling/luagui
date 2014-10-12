@@ -9,6 +9,7 @@ common.add_value = require 'gui.common.value'
 common.add_anchor = require 'gui.common.anchor'
 common.add_color = require 'gui.common.color'
 common.add_text_color = require 'gui.common.text_color'
+common.add_resizable = require 'gui.common.resizable'
 
 function common.create_metatable(class)
   return {

@@ -13,6 +13,7 @@ common.add_position(metatable, 'window')
 common.add_client_size(metatable, 'window')
 common.add_label(metatable, 'window', 'title')
 common.add_color(metatable, 'window')
+common.add_resizable(metatable, 'window')
 
 function Window.create()
   local window = {}
