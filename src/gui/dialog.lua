@@ -11,16 +11,37 @@ common.add_client_size(metatable, 'dialog box')
 common.add_label(metatable, 'dialog box', 'title')
 common.add_color(metatable, 'dialog box')
 
+function metatable.set_resizable(object, value)
+  local width = object.width
+  local height = object.height
+  
+  if value then
+    object.wx:SetWindowStyleFlag(wx.wxDEFAULT_DIALOG_STYLE + wx.wxRESIZE_BORDER)
+  else
+    object.wx:SetWindowStyleFlag(wx.wxDEFAULT_DIALOG_STYLE)
+  end
+  
+  object.wx:Refresh()
+  object.width = width
+  object.height = height
+  
+  return value
+end
+
 function Dialog.create(parent)
   local dialog = {
-    parent = parent
+    parent = parent,
+    resizable = true
   }
   
   dialog.wx = wx.wxDialog()
   dialog.wx:Create(
     dialog.parent.wx,
     wx.wxID_ANY,
-    '')
+    '',
+    wx.wxDefaultPosition,
+    wx.wxDefaultSize,
+    wx.wxDEFAULT_DIALOG_STYLE + wx.wxRESIZE_BORDER)
   
   dialog.wx_panel = wx.wxPanel(
     dialog.wx,
