@@ -116,90 +116,139 @@ local api = {
     
     childs = {
       background_color = {
-          type = 'value',
-          description = 'The background color of the dialog. You can specify the color as a list of numbers in the order red, green, blue, or as a table with the fields red, green and blue. So, the color orange would be either { 1.0, 0.4, 0 } or { red = 1.0, green = 0.4, blue = 0 }. When you read the background color, it is always specified in the second format. This property is not supported under MacOS.'
-        },
-        
-        height = {
-          type = 'value',
-          description = 'The height of the dialog in pixels. The height does not include borders or the title bar.'
-        },
-        
-        resizable = {
-          type = 'value',
-          description = 'true if the user can resize the dialog, false if the size of the dialog is fixed.'
-        },
-        
-        title = {
-          type = 'value',
-          description = 'The text that is displayed in the title bar of the dialog.'
-        },
-        
-        width = {
-          type = 'value',
-          description = 'The width of the dialog in pixels. The width does not include borders.'        
-        },
-        
-        x = {
-          type = 'value',
-          description = 'The x-coordinate of the dialog in pixels.'
-        },
-        
-        y = {
-          type = 'value',
-          description = 'The y-coordinate of the dialog in pixels.'
-        },
-        
-        add_button = {
-          type = 'method',
-          description = 'Creates a button and adds it to the dialog.',
-          args = '()',
-          returns = '(button)',
-          valuetype = 'button'
-        },
-        
-        add_image = {
-          type = 'method',
-          description = 'Creates an image and adds it to the dialog.',
-          args = '()',
-          returns = '(image)',
-          valuetype = 'image'
-        },
-        
-        add_label = {
-          type = 'method',
-          description = 'Creates a label and adds it to the dialog.',
-          args = '()',
-          returns = '(label)',
-          valuetype = 'label'
-        },
-        
-        add_text_box = {
-          type = 'method',
-          description = 'Creates a text box and adds it to the dialog.',
-          args = '()',
-          returns = '(text_box)',
-          value_type = 'text_box'
-        },
-        
-        close = {
-          type = 'method',
-          description = 'Closes the dialog.'
-        },
-        
-        show_modal = {
-          type = 'method',
-          description = "Shows the dialog. While the dialog is visible, the user can't activate the parent window.",
-          args = '()',
-          returns = '()'
-        },
-        
-        show_modeless = {
-          type = 'method',
-          description = 'Shows the dialog. The user can still activate the parent window while the dialog is visible.',
-          args = '()',
-          returns = '()'
-        },
+        type = 'value',
+        description = 'The background color of the dialog. You can specify the color as a list of numbers in the order red, green, blue, or as a table with the fields red, green and blue. So, the color orange would be either { 1.0, 0.4, 0 } or { red = 1.0, green = 0.4, blue = 0 }. When you read the background color, it is always specified in the second format. This property is not supported under MacOS.'
+      },
+      
+      height = {
+        type = 'value',
+        description = 'The height of the dialog in pixels. The height does not include borders or the title bar.'
+      },
+      
+      resizable = {
+        type = 'value',
+        description = 'true if the user can resize the dialog, false if the size of the dialog is fixed.'
+      },
+      
+      title = {
+        type = 'value',
+        description = 'The text that is displayed in the title bar of the dialog.'
+      },
+      
+      width = {
+        type = 'value',
+        description = 'The width of the dialog in pixels. The width does not include borders.'        
+      },
+      
+      x = {
+        type = 'value',
+        description = 'The x-coordinate of the dialog in pixels.'
+      },
+      
+      y = {
+        type = 'value',
+        description = 'The y-coordinate of the dialog in pixels.'
+      },
+      
+      add_button = {
+        type = 'method',
+        description = 'Creates a button and adds it to the dialog.',
+        args = '()',
+        returns = '(button)',
+        valuetype = 'button'
+      },
+      
+      add_image = {
+        type = 'method',
+        description = 'Creates an image and adds it to the dialog.',
+        args = '()',
+        returns = '(image)',
+        valuetype = 'image'
+      },
+      
+      add_label = {
+        type = 'method',
+        description = 'Creates a label and adds it to the dialog.',
+        args = '()',
+        returns = '(label)',
+        valuetype = 'label'
+      },
+      
+      add_text_box = {
+        type = 'method',
+        description = 'Creates a text box and adds it to the dialog.',
+        args = '()',
+        returns = '(text_box)',
+        value_type = 'text_box'
+      },
+      
+      close = {
+        type = 'method',
+        description = 'Closes the dialog.'
+      },
+      
+      show_modal = {
+        type = 'method',
+        description = "Shows the dialog. While the dialog is visible, the user can't activate the parent window.",
+        args = '()',
+        returns = '()'
+      },
+      
+      show_modeless = {
+        type = 'method',
+        description = 'Shows the dialog. The user can still activate the parent window while the dialog is visible.',
+        args = '()',
+        returns = '()'
+      },
+      
+      on_key_down = {
+        type = 'method',
+        description = 'The event handler that is called when the user presses a key while the dialog has focus.',
+        args = '(key, modifiers)',
+        returns = '()'
+      },
+      
+      on_key_up = {
+        type = 'method',
+        description = 'The event handler that is called when the user releases a key while the dialog has focus.',
+        args = '(key, modifiers)',
+        returns = '()'
+      },
+      
+      on_mouse_down = {
+        type = 'method',
+        description = 'The event handler that is called when the user releases a mouse button while the mouse cursor is over the dialog.',
+        args = '(button, x, y)',
+        returns = '()'
+      },
+      
+      on_mouse_move = {
+        type = 'method',
+        description = 'The event handler that is called when the user moves the mouse cursor over the dialog.',
+        args = '(x, y)',
+        returns = '()'
+      },
+      
+      on_mouse_up = {
+        type = 'method',
+        description = 'The event handler that is called when the user presses a mouse button while the mouse cursor is over the dialog.',
+        args = '(button, x, y)',
+        returns = '()'
+      },
+      
+      on_move = {
+        type = 'method',
+        description = 'The event handler that is called when the user moves the dialog.',
+        args = '()',
+        returns = '()'
+      },
+      
+      on_resize = {
+        type = 'method',
+        description = 'The event handler that is called when the user resizes the dialog.',
+        args = '()',
+        returns = '()'
+      }
     }
   },
   
@@ -737,6 +786,20 @@ local api = {
         type = 'method',
         description = 'The event handler that is called when the user presses a mouse button while the mouse cursor is over the window.',
         args = '(button, x, y)',
+        returns = '()'
+      },
+      
+      on_move = {
+        type = 'method',
+        description = 'The event handler that is called when the user moves the window.',
+        args = '()',
+        returns = '()'
+      },
+      
+      on_resize = {
+        type = 'method',
+        description = 'The event handler that is called when the user resizes the window.',
+        args = '()',
         returns = '()'
       }
     }
