@@ -125,6 +125,11 @@ local api = {
           description = 'The height of the dialog in pixels. The height does not include borders or the title bar.'
         },
         
+        resizable = {
+          type = 'value',
+          description = 'true if the user can resize the dialog, false if the size of the dialog is fixed.'
+        },
+        
         title = {
           type = 'value',
           description = 'The text that is displayed in the title bar of the dialog.'
@@ -620,6 +625,11 @@ local api = {
         type = 'value',
         description = "The window's menu bar.",
         valuetype = 'menu_bar'
+      },
+      
+      resizable = {
+        type = 'value',
+        description = 'true if the user can resize the window, false if the size of the window is fixed.'
       },
       
       title = {
