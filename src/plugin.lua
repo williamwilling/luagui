@@ -7,6 +7,7 @@ local api = {
       create_timer = {
         type = 'function',
         description = 'Creates a timer.',
+        args = '()',
         returns = '(timer)',
         valuetype = 'timer'
       },
