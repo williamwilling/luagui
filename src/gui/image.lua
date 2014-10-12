@@ -6,7 +6,7 @@ common.add_position(metatable, 'image')
 common.add_size(metatable, 'image')
 common.add_anchor(metatable, 'image')
 
-metatable.set_file = function(object, value)
+metatable.set_file_name = function(object, value)
   object.image = wx.wxImage(value)
   object.wx:SetSize(object.image:GetWidth(), object.image:GetHeight())
   

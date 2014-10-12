@@ -318,7 +318,7 @@ local api = {
         description = "The sides of the image's parent to which the image is anchored. When the image is anchored to a side, the distance between the image and the parent's side don't change when you resize the parent. Valid values are 'left', 'right', 'top', 'bottom', or combinations thereof separated by a space. 'all' is a shortcut for 'top left bottom right'."
       },
       
-      file = {
+      file_name = {
         type = 'value',
         description = 'The path of the file that contains the image.'
       },
