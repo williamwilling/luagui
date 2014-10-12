@@ -18,6 +18,11 @@ function Dialog.create(parent)
     resizable = true
   }
   
+  -- The delay prevents the dialog window from being created before the creation of its parent has
+  -- finished. Without the delay, it sometimes happens that the dialog is shown immediately,
+  -- without a call to show_modal() or show_modeless().
+  wx.wxMilliSleep(50)
+  
   dialog.wx = wx.wxDialog()
   dialog.wx:Create(
     dialog.parent.wx,
