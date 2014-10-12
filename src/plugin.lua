@@ -813,7 +813,7 @@ return {
   name = "Lua GUI",
   description = "A GUI library for Lua that is simple to use.",
   author = "William Willing",
-  version = 1,
+  version = 2,
   
   onRegister = function()
     ide:AddAPI("lua", "gui", api)
