@@ -17,7 +17,7 @@ You can find a reference manual and code samples on the [wiki](https://github.co
 ##License
 Lua GUI is licensed under the terms of the [Open Software License 3.0](http://opensource.org/licenses/OSL-3.0). You should read the entire license text, but here is the gist.
 
-* You can use the Lua GUI source code as is for any purpose you want.
+* You can use the Lua GUI source code as is for pretty much any purpose you want.
 * You can create an application that uses Lua GUI and release your application under whatever terms you like.
 * If you modify Lua GUI in any way, you must release the source code of your modifications under the Open Software License 3.0.
 * Don't pretend you wrote Lua GUI.
