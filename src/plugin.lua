@@ -495,7 +495,9 @@ local api = {
       
       on_select = {
         type = 'method',
-        description = 'The event handler that is called when the user selects the menu item.'
+        description = 'The event handler that is called when the user selects the menu item.',
+        args = '()',
+        returns = '()'
       }
     }
   },
