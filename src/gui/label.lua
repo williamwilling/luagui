@@ -18,9 +18,20 @@ local base_set_text = metatable.set_text
 function metatable.set_text(object, value)
   local width = object.width
   base_set_text(object, value)
+  metatable[object].original_text = value
   object.width = width
   
   word_wrap(object)
+end
+
+local base_set_width = metatable.set_width
+function metatable.set_width(object, value)
+  if object.word_wrap then
+    object.wx:SetLabel(metatable[object].original_text or '')
+    object.wx:Wrap(value)
+  end
+  
+  base_set_width(object, value)
 end
 
 function metatable.set_word_wrap(object, value)
