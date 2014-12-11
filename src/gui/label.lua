@@ -7,31 +7,25 @@ common.add_size(metatable, 'label')
 common.add_label(metatable, 'label', 'text')
 
 local function word_wrap(label)
-  local width = label.width
-  
-  if label.word_wrap then
-    label.wx:Wrap(label.width)
-  else
-    label.wx:SetLabel(metatable[label].original_text)
-  end
-  
-  label.width = width
+  label.width = label.width
 end
 
 local base_set_text = metatable.set_text
 function metatable.set_text(object, value)
-  local width = object.width
-  base_set_text(object, value)
   metatable[object].original_text = value
-  object.width = width
   
-  word_wrap(object)
+  if object.width > 0 then
+    word_wrap(object)
+  else
+    base_set_text(object, value)
+  end
 end
 
 local base_set_width = metatable.set_width
 function metatable.set_width(object, value)
+  object.wx:SetLabel(metatable[object].original_text or '')
+  
   if object.word_wrap then
-    object.wx:SetLabel(metatable[object].original_text or '')
     object.wx:Wrap(value)
   end
   
