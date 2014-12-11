@@ -6,6 +6,15 @@ common.add_position(metatable, 'label')
 common.add_size(metatable, 'label')
 common.add_label(metatable, 'label', 'text')
 
+function metatable.set_word_wrap(object, value)
+  local values = getmetatable(object)[object]
+  values.word_wrap = value
+  
+  if value and object.width ~= nil then
+    object.wx:Wrap(object.width)
+  end
+end
+
 function Label.create(parent)
   local label = {
     parent = parent
