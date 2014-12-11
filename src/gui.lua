@@ -1,3 +1,5 @@
+local print_backup = print
+
 require 'wx'
 local Window = require 'gui.window'
 local FileDialog = require 'gui.file_dialog'
@@ -23,6 +25,8 @@ end
 function gui.run()
   wx.wxGetApp():MainLoop()
 end
+
+print = print_backup
 
 function gui.reload()
   package.loaded.gui = nil
