@@ -1,5 +1,5 @@
-return function(control)
-  control.destroy = function(self)
+return function(object)
+  object.destroy = function(self)
     -- Unregister the control's event handlers.
     for _, unregister_event_handler in ipairs(self.wx_events) do
       unregister_event_handler()

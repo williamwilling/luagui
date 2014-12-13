@@ -10,7 +10,7 @@ common.add_anchor = require 'gui.common.anchor'
 common.add_color = require 'gui.common.color'
 common.add_text_color = require 'gui.common.text_color'
 common.add_resizable = require 'gui.common.resizable'
-common.make_control = require 'gui.common.control'
+common.is_destroyable = require 'gui.common.destroyable'
 
 function common.create_metatable(class)
   return {

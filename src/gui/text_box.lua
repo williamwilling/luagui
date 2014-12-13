@@ -1,7 +1,7 @@
 local common = require 'gui.common'
 
 local TextBox = {}
-common.make_control(TextBox)
+common.is_destroyable(TextBox)
 
 local metatable = common.create_metatable(TextBox)
 common.add_position(metatable, 'text box')

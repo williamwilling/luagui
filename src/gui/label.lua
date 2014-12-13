@@ -1,7 +1,7 @@
 local common = require 'gui.common'
 
 local Label = {}
-common.make_control(Label)
+common.is_destroyable(Label)
 
 local metatable = common.create_metatable(Label)
 common.add_position(metatable, 'label')

@@ -1,7 +1,7 @@
 local common = require 'gui.common'
 
 local Image = {}
-common.make_control(Image)
+common.is_destroyable(Image)
 
 local metatable = common.create_metatable(Image)
 common.add_position(metatable, 'image')

@@ -1,7 +1,7 @@
 local common = require 'gui.common'
 
 local Button = {}
-common.make_control(Button)
+common.is_destroyable(Button)
 
 local metatable = common.create_metatable(Button)
 common.add_position(metatable, 'button')
