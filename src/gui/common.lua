@@ -106,9 +106,9 @@ function common.add_event(object, event_name, wx_event, ...)
   event_source:Connect(wx_event, trigger_event)
   
   -- Store the code that unregisters the event, so we can call it when the
-  -- object is destroyed.
-  object.wx_events = object.wx_events or {}
-  table.insert(object.wx_events, function()
+  -- object is destroyed. Note that the code is only stored if the object
+  -- has a wx_events property.
+  table.insert(object.wx_events or {}, function()
     event_source:Disconnect(wx.wxID_ANY, wx.wxID_ANY, wx_event)
   end)
 end
@@ -135,14 +135,29 @@ function common.propagate_events(object, wx_events)
   end
 end
 
+function common.add_anchor_event(object, f)
+  object.parent.wx:Connect(wx.wxEVT_SIZE, function(event)
+    local metatable = getmetatable(object)
+    if metatable then
+      metatable.update_anchor(object)
+      
+      if type(f) == 'function' then
+        f()
+      end
+    end
+    
+    event:Skip()
+  end)
+end
+
 function common.add_mouse_events(object)
   common.mouse_listeners = common.mouse_listeners or {}
   table.insert(common.mouse_listeners, object)
   
   -- Store the code that unsubscribed from mouse events, so we can call it when
-  -- the object is destroyed.
-  object.wx_events = object.wx_events or {}
-  table.insert(object.wx_events, function()
+  -- the object is destroyed. Note that the code is only stored if the object
+  -- has a wx_events property.
+  table.insert(object.wx_events or {}, function()
     for i, v in ipairs(common.mouse_listeners) do
       if v == object then
         table.remove(common.mouse_listeners, i)

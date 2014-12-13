@@ -34,8 +34,8 @@ local function create_text_box(text_box)
   
   common.propagate_events(text_box)
   common.add_mouse_events(text_box)
+  common.add_anchor_event(text_box)
   common.add_event(text_box, 'on_text_changed', wx.wxEVT_COMMAND_TEXT_UPDATED)
-  text_box.parent.wx:Connect(wx.wxEVT_SIZE, function(event) metatable.update_anchor(text_box) event:Skip() end)
   
   setmetatable(text_box, metatable)
   text_box.anchor = 'top left'
@@ -76,7 +76,8 @@ end
 
 function TextBox.create(parent)
   local text_box = {
-    parent = parent
+    parent = parent,
+    wx_events = {}
   }
   
   create_text_box(text_box)

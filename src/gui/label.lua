@@ -43,7 +43,8 @@ end
 
 function Label.create(parent)
   local label = {
-    parent = parent
+    parent = parent,
+    wx_events = {}
   }
   
   label.wx = wx.wxStaticText(

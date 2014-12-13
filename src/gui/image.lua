@@ -17,7 +17,8 @@ end
 
 function Image.create(parent)
   local image = {
-    parent = parent
+    parent = parent,
+    wx_events = {}
   }
   
   image.wx = wx.wxPanel(
@@ -26,10 +27,8 @@ function Image.create(parent)
     wx.wxDefaultPosition,
     wx.wxDefaultSize)
   
-  parent.wx:Connect(wx.wxEVT_SIZE, function(event)
-    metatable.update_anchor(image)
-    image.wx:Refresh()
-    event:Skip()
+  common.add_anchor_event(image, function()
+      image.wx:Refresh()
   end)
 
   image.wx:Connect(wx.wxEVT_PAINT, function(event)

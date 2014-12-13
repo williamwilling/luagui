@@ -13,7 +13,8 @@ common.add_text_color(metatable, 'button')
 
 function Button.create(parent)
   local button = {
-    parent = parent
+    parent = parent,
+    wx_events = {}
   }
   
   button.wx = wx.wxButton(
@@ -25,8 +26,8 @@ function Button.create(parent)
   
   common.propagate_events(button, { wx.wxEVT_MOTION, wx.wxEVT_RIGHT_UP, wx.wxEVT_RIGHT_DOWN, wx.wxEVT_MIDDLE_UP, wx.wxEVT_MIDDLE_DOWN })
   common.add_mouse_events(button)
+  common.add_anchor_event(button)
   common.add_event(button, 'on_click', wx.wxEVT_COMMAND_BUTTON_CLICKED)
-  parent.wx:Connect(wx.wxEVT_SIZE, function(event) metatable.update_anchor(button) event:Skip() end)
   
   setmetatable(button, metatable)
   button.anchor = 'top left'
