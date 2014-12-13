@@ -1,6 +1,8 @@
 local common = require 'gui.common'
 
 local Image = {}
+common.make_control(Image)
+
 local metatable = common.create_metatable(Image)
 common.add_position(metatable, 'image')
 common.add_size(metatable, 'image')
@@ -49,10 +51,6 @@ function Image.create(parent)
   image.anchor = 'top left'
   
   return image
-end
-
-function Image:destroy()
-  self.wx:Destroy()
 end
 
 return Image

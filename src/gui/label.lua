@@ -1,6 +1,8 @@
 local common = require 'gui.common'
 
 local Label = {}
+common.make_control(Label)
+
 local metatable = common.create_metatable(Label)
 common.add_position(metatable, 'label')
 common.add_size(metatable, 'label')
@@ -59,10 +61,6 @@ function Label.create(parent)
   label.anchor = 'top left'
   
   return label
-end
-
-function Label:destroy()
-  self.wx:Destroy()
 end
 
 return Label

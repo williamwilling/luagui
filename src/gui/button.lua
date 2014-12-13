@@ -1,6 +1,8 @@
 local common = require 'gui.common'
 
 local Button = {}
+common.make_control(Button)
+
 local metatable = common.create_metatable(Button)
 common.add_position(metatable, 'button')
 common.add_size(metatable, 'button')
@@ -35,10 +37,6 @@ end
 function Button:click()
   local event = wx.wxCommandEvent(wx.wxEVT_COMMAND_BUTTON_CLICKED)
   self.wx:ProcessEvent(event)
-end
-
-function Button:destroy()
-  self.wx:Destroy()
 end
 
 return Button
