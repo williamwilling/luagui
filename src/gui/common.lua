@@ -98,11 +98,20 @@ function common.add_event(object, event_name, wx_event, ...)
     end
   end
   
+  local event_source = object.wx
   if object.wx_panel and wx_event ~= wx.wxEVT_MOVE then
-    object.wx_panel:Connect(wx_event, trigger_event)
-  else
-    object.wx:Connect(wx_event, trigger_event)
+    event_source = object.wx_panel
   end
+    
+  event_source:Connect(wx_event, trigger_event)
+  
+  -- Store the code that unregisters the event, so we can call it when the
+  -- object is destroyed.
+  object.wx_events = object.wx_events or {}
+  
+  table.insert(object.wx_events, function()
+    event_source:Disconnect(wx.wxID_ANY, wx.wxID_ANY, wx_event)
+  end)
 end
 
 function common.propagate_events(object, wx_events)
