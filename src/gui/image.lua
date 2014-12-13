@@ -11,6 +11,7 @@ common.add_anchor(metatable, 'image')
 metatable.set_file_name = function(object, value)
   object.image = wx.wxImage(value)
   object.wx:SetSize(object.image:GetWidth(), object.image:GetHeight())
+  object.wx:Refresh()
   
   return value
 end
