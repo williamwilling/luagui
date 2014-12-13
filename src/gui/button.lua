@@ -37,4 +37,8 @@ function Button:click()
   self.wx:ProcessEvent(event)
 end
 
+function Button:destroy()
+  self.wx:Destroy()
+end
+
 return Button

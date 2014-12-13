@@ -61,4 +61,8 @@ function Label.create(parent)
   return label
 end
 
+function Label:destroy()
+  self.wx:Destroy()
+end
+
 return Label

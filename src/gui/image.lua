@@ -51,4 +51,8 @@ function Image.create(parent)
   return image
 end
 
+function Image:destroy()
+  self.wx:Destroy()
+end
+
 return Image
