@@ -1,6 +1,8 @@
 local common = require 'gui.common'
 
 local TextBox = {}
+common.make_control(TextBox)
+
 local metatable = common.create_metatable(TextBox)
 common.add_position(metatable, 'text box')
 common.add_size(metatable, 'text box')
