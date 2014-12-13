@@ -81,6 +81,13 @@ local api = {
         returns = '()'
       },
       
+      destroy = {
+        type = 'method',
+        description = 'Removes the button from its window. Once a button is destroyed, you can\'t access its properties, call its functions, or listen to its events anymore.',
+        args = '()',
+        returns = '()'
+      },
+      
       on_click = {
         type = 'method',
         description = 'The event handler that is called when the user clicks the button with the left mouse button.',
@@ -344,6 +351,13 @@ local api = {
         description = "The image's y-coordinate in pixels relative to the window."
       },
       
+      destroy = {
+        type = 'method',
+        description = 'Removes the image from its window. Once an image is destroyed, you can\'t access its properties, call its functions, or listen to its events anymore.',
+        args = '()',
+        returns = '()'
+      },
+      
       on_mouse_down = {
         type = 'method',
         description = 'The event handler that is called when the user releases a mouse button while the mouse cursor is over the image.',
@@ -412,6 +426,13 @@ local api = {
       y = {
         type = 'value',
         description = "The label's y-coordinate in pixels relative to the window."
+      },
+      
+      destroy = {
+        type = 'method',
+        description = 'Removes the label from its window. Once a label is destroyed, you can\'t access its properties, call its functions, or listen to its events anymore.',
+        args = '()',
+        returns = '()'
       },
       
       on_mouse_down = {
@@ -553,6 +574,13 @@ local api = {
       background_color = {
         type = 'value',
         description = 'The background color of the text box. You can specify the color as a list of numbers in the order red, green, blue, or as a table with the fields red, green and blue. So, the color orange would be either { 1.0, 0.4, 0 } or { red = 1.0, green = 0.4, blue = 0 }. When you read the background color, it is always specified in the second format. This property is not supported under MacOS.'
+      },
+      
+      destroy = {
+        type = 'method',
+        description = 'Removes the text box from its window. Once a text box is destroyed, you can\'t access its properties, call its functions, or listen to its events anymore.',
+        args = '()',
+        returns = '()'
       },
       
       height = {
