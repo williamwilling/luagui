@@ -11,6 +11,16 @@ common.add_anchor(metatable, 'button')
 common.add_color(metatable, 'button')
 common.add_text_color(metatable, 'button')
 
+function metatable.set_word_wrap(object, value)
+  if value and string.sub(object.text, -1) ~= '\n' then
+    object.text = object.text .. '\n'
+  end
+  
+  if not value and string.sub(object.text, -1) == '\n' then
+    object.text = string.sub(object.text, 1, -2)
+  end
+end
+
 function Button.create(parent)
   local button = {
     parent = parent,
