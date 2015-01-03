@@ -11,6 +11,24 @@ common.add_anchor(metatable, 'button')
 common.add_color(metatable, 'button')
 common.add_text_color(metatable, 'button')
 
+function metatable.set_word_wrap(object, value)
+  if value and string.sub(object.text, -1) ~= '\n' then
+    object.wx:SetLabel(object.text .. '\n')
+  end
+  
+  if not value and string.sub(object.text, -1) == '\n' then
+    object.wx:SetLabel(string.sub(object.text, 1, -2))
+  end
+end
+
+local base_set_text = metatable.set_text
+function metatable.set_text(object, value)
+  local result = base_set_text(object, value)
+  object.word_wrap = object.word_wrap
+  
+  return result
+end
+
 function Button.create(parent)
   local button = {
     parent = parent,
