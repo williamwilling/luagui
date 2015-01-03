@@ -64,6 +64,11 @@ local api = {
         description = 'The width of the button in pixels.'      
       },
       
+      word_wrap = {
+        type = 'value',
+        description = 'true if words that don\'t fit on the button automatically wrap to the next line, false if long lines will be cut off.'
+      },
+      
       x = {
         type = 'value',
         description = 'The x-position of the button in pixels.'
@@ -416,6 +421,11 @@ local api = {
       width = {
         type = 'value',
         description = "The label's width in pixels."
+      },
+      
+      word_wrap = {
+        type = 'value',
+        description = 'true if words that don\'t fit in the label automatically wrap to the next line, false if long lines will be cut off.  Note that you must set the label\'s width in order for word wrapping to work.'
       },
       
       x = {
