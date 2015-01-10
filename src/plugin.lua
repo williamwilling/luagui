@@ -214,6 +214,13 @@ local api = {
         returns = '()'
       },
       
+      on_closing = {
+        type = 'method',
+        description = 'The event handler that is called when the dialog is about to close. Return false from the event handler to prevent the dialog from closing.',
+        args = '()',
+        return = '()'
+      },
+      
       on_key_down = {
         type = 'method',
         description = 'The event handler that is called when the user presses a key while the dialog has focus.',
@@ -807,7 +814,7 @@ local api = {
         description = 'The event handler that is called when the window is about to close. Return false from the event handler to prevent the window from closing.',
         args = '()',
         return = '()'
-      }
+      },
       
       on_key_down = {
         type = 'method',
