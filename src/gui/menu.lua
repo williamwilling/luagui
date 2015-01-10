@@ -38,4 +38,8 @@ function Menu:add_item(text)
   return item
 end
 
+function Menu:add_separator()
+  self.wx:AppendSeparator()
+end
+
 return Menu
