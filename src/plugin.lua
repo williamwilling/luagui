@@ -484,6 +484,11 @@ local api = {
         args = '(text)',
         returns = '(menu_item)',
         valuetype = 'menu_item'
+      },
+      
+      add_separator = {
+        type = 'method',
+        description = 'Adds a horizontal line to the menu.'
       }
     }
   },
