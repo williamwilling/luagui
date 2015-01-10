@@ -1,8 +1,8 @@
 return {
   name = "Lua GUI",
-  description = "A GUI library for Lua that is simple to use.",
+  description = "An easy-to-use library for creating GUIs with Lua.",
   author = "William Willing",
-  version = 2,
+  version = 3,
   
   install = function()
     local remotePath = "http://zerobranestore.blob.core.windows.net/luagui/"
@@ -28,6 +28,7 @@ return {
     download(remotePath .. "common.anchor.lua", idePath.. "lualibs/gui/common/anchor.lua")
     download(remotePath .. "common.client_size.lua", idePath.. "lualibs/gui/common/client_size.lua")
     download(remotePath .. "common.color.lua", idePath.. "lualibs/gui/common/color.lua")
+    download(remotePath .. "common.destroyable.lua", idePath .. "lualibs/gui/common/destroyable.lua")
     download(remotePath .. "common.label.lua", idePath.. "lualibs/gui/common/label.lua")
     download(remotePath .. "common.position.lua", idePath.. "lualibs/gui/common/position.lua")
     download(remotePath .. "common.resizable.lua", idePath.. "lualibs/gui/common/resizable.lua")

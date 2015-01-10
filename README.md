@@ -1,6 +1,6 @@
 #Lua GUI
 
-Lua GUI is a library for creating GUI programs with Lua aimed at unexperienced programmers. The library is being developed with the following goals in mind.
+Lua GUI is a library for creating GUIs with Lua aimed at unexperienced programmers. The library is being developed with the following goals in mind.
 
 * Easy to use.
 * Using conventions common to Lua. (It shouldn't feel like a wrapper around, for example, a C++ library.)

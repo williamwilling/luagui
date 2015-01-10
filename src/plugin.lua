@@ -849,9 +849,9 @@ local api = {
 
 return {
   name = "Lua GUI",
-  description = "A GUI library for Lua that is simple to use.",
+  description = "An easy-to-use library for creating GUIs with Lua.",
   author = "William Willing",
-  version = 2,
+  version = 3,
   
   onRegister = function()
     ide:AddAPI("lua", "gui", api)
