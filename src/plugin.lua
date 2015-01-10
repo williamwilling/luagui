@@ -488,7 +488,9 @@ local api = {
       
       add_separator = {
         type = 'method',
-        description = 'Adds a horizontal line to the menu.'
+        description = 'Adds a horizontal line to the menu.',
+        args = '()',
+        returns = '()'
       }
     }
   },
@@ -799,6 +801,13 @@ local api = {
         returns = '(file_dialog)',
         value_type = 'file_dialog'
       },
+      
+      on_closing = {
+        type = 'method',
+        description = 'The event handler that is called when the window is about to close. Return false from the event handler to prevent the window from closing.',
+        args = '()',
+        return = '()'
+      }
       
       on_key_down = {
         type = 'method',
