@@ -44,6 +44,12 @@ function Dialog.create(parent)
   common.add_event(dialog, 'on_resize', wx.wxEVT_SIZE)
   common.add_event(dialog, 'on_move', wx.wxEVT_MOVE)
   
+  dialog.wx:Connect(wx.wxEVT_CLOSE_WINDOW, function(event)
+    if type(dialog.on_closing) ~= 'function' or dialog:on_closing() ~= false or not event:CanVeto() then
+      dialog.wx:Destroy()
+    end
+  end)
+  
   setmetatable(dialog, metatable)
   return dialog
 end
