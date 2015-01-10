@@ -42,10 +42,8 @@ function Window.create()
   end)
 
   window.wx:Connect(wx.wxEVT_CLOSE_WINDOW, function(event)
-    if type(window.on_closing) == 'function' then
-      if window:on_closing() ~= false or not event:CanVeto() then
-        window.wx:Destroy()
-      end
+    if type(window.on_closing) ~= 'function' or window:on_closing() ~= false or not event:CanVeto() then
+      window.wx:Destroy()
     end
   end)
   
