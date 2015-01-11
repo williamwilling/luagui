@@ -37,7 +37,7 @@ function Image.create(parent)
       local dc = wx.wxPaintDC(image.wx)
       
       local bitmap = wx.wxBitmap(image.image:Scale(image.width, image.height))  
-      dc:DrawBitmap(bitmap, 0, 0, false)
+      dc:DrawBitmap(bitmap, 0, 0, image.image:HasMask())
       
       bitmap:delete()
       dc:delete()
