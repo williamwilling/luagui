@@ -7,6 +7,10 @@ metatable.get_text = function(object)
   return object.wx:GetItemLabelText()
 end
 
+metatable.set_text = function(object, value)
+  object.wx:SetItemLabel(value)
+end
+
 metatable.get_checked = function(object)
   return object.wx:IsChecked()
 end

@@ -9,6 +9,11 @@ metatable.get_text = function(object)
   return wx.wxMenuItem.GetLabelText(text)
 end
 
+metatable.set_text = function(object, value)
+  local menu_id = object.parent.wx:FindMenu(object.wx:GetTitle())
+  object.parent.wx:SetLabelTop(menu_id, value)
+end
+
 local menu_items = {}
 
 local function on_item_select(event_args)
@@ -21,8 +26,11 @@ local function on_item_select(event_args)
   end
 end
 
-function Menu.create(name)
-  local menu = {}
+function Menu.create(name, parent)
+  local menu = {
+    parent = parent,
+  }
+  
   menu.wx = wx.wxMenu()
   
   menu.wx:Connect(wx.wxEVT_COMMAND_MENU_SELECTED, on_item_select)

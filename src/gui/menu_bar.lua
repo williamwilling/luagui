@@ -13,7 +13,7 @@ function MenuBar.create()
 end
 
 function MenuBar:add_menu(text)
-  local menu = Menu.create(text)
+  local menu = Menu.create(text, self)
   self.wx:Append(menu.wx, text)
   return menu
 end
