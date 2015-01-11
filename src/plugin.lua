@@ -98,6 +98,13 @@ local api = {
         returns = '()'
       },
       
+      focus = {
+        type = 'method',
+        description = 'Gives the keyboard focus to the button.',
+        args = '()',
+        returns = '()'
+      },
+      
       on_click = {
         type = 'method',
         description = 'The event handler that is called when the user clicks the button with the left mouse button.',
@@ -608,6 +615,13 @@ local api = {
       destroy = {
         type = 'method',
         description = 'Removes the text box from its window. Once a text box is destroyed, you can\'t access its properties, call its functions, or listen to its events anymore.',
+        args = '()',
+        returns = '()'
+      },
+      
+      focus = {
+        type = 'method',
+        description = 'Gives the keyboard focus to the text box.',
         args = '()',
         returns = '()'
       },
