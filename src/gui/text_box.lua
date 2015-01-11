@@ -84,4 +84,8 @@ function TextBox.create(parent)
   return text_box
 end
 
+function TextBox:focus()
+  self.wx:SetFocus()
+end
+
 return TextBox
