@@ -21,6 +21,24 @@ function metatable.set_word_wrap(object, value)
   end
 end
 
+function metatable.set_align(object, value)
+  local flags = {
+    left = wx.wxBU_LEFT,
+    right = wx.wxBU_RIGHT,
+    top = wx.wxBU_TOP,
+    bottom = wx.wxBU_BOTTOM
+  }
+  
+  local style = 0
+  for k, v in pairs(flags) do
+    if string.match(value, k) then
+      style = style + v
+    end
+  end
+  
+  object.wx:SetWindowStyleFlag(style)
+end
+
 local base_set_text = metatable.set_text
 function metatable.set_text(object, value)
   local result = base_set_text(object, value)
@@ -49,6 +67,7 @@ function Button.create(parent)
   
   setmetatable(button, metatable)
   button.anchor = 'top left'
+  button.align = 'center'
   
   return button
 end
