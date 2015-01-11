@@ -2,6 +2,7 @@ local common = require 'gui.common'
 
 local TextBox = {}
 common.is_destroyable(TextBox)
+common.is_focusable(TextBox)
 
 local metatable = common.create_metatable(TextBox)
 common.add_position(metatable, 'text box')
@@ -82,10 +83,6 @@ function TextBox.create(parent)
   
   create_text_box(text_box)
   return text_box
-end
-
-function TextBox:focus()
-  self.wx:SetFocus()
 end
 
 return TextBox

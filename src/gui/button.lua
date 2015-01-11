@@ -2,6 +2,7 @@ local common = require 'gui.common'
 
 local Button = {}
 common.is_destroyable(Button)
+common.is_focusable(Button)
 
 local metatable = common.create_metatable(Button)
 common.add_position(metatable, 'button')

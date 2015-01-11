@@ -11,6 +11,7 @@ common.add_color = require 'gui.common.color'
 common.add_text_color = require 'gui.common.text_color'
 common.add_resizable = require 'gui.common.resizable'
 common.is_destroyable = require 'gui.common.destroyable'
+common.is_focusable = require 'gui.common.focusable'
 
 function common.create_metatable(class)
   return {
