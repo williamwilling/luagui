@@ -34,6 +34,11 @@ local api = {
     description = 'A button.',
     
     childs = {
+      align = {
+          type = 'value',
+          description = "The position of text on the button. Valid values are 'top left', 'top right', 'bottom left', 'bottom right', 'top', 'bottom', 'left', 'right', and 'center'."
+      },
+      
       anchor = {
         type = 'value',
         description = "The sides of the button's parent to which the button is anchored. When the button is anchored to a side, the distance between the button and the parent's side don't change when you resize the parent. Valid values are 'left', 'right', 'top', 'bottom', or combinations thereof separated by a space. 'all' is a shortcut for 'top left bottom right'."
