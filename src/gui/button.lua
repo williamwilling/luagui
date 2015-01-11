@@ -21,7 +21,7 @@ function metatable.set_word_wrap(object, value)
   end
 end
 
-function metatable.set_align(object, value)
+function metatable.set_alignment(object, value)
   local flags = {
     left = wx.wxBU_LEFT,
     right = wx.wxBU_RIGHT,
@@ -67,7 +67,7 @@ function Button.create(parent)
   
   setmetatable(button, metatable)
   button.anchor = 'top left'
-  button.align = 'center'
+  button.alignment = 'center'
   
   return button
 end

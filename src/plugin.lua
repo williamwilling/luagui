@@ -34,7 +34,7 @@ local api = {
     description = 'A button.',
     
     childs = {
-      align = {
+      alignment = {
           type = 'value',
           description = "The position of text on the button. Valid values are 'top left', 'top right', 'bottom left', 'bottom right', 'top', 'bottom', 'left', 'right', and 'center'."
       },
