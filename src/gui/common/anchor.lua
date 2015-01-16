@@ -99,10 +99,17 @@ return function(metatable, object_description)
       height = object.height
     end
     
-    object.wx:Move(x, y)
-    object.wx:SetSize(width, height)  -- NOTE: this line assumes that anchored controls are always
-                                      -- sized based on the entire control, not just the client
-                                      -- area. If this ever becomes not true, we'll have to figure
-                                      -- out whether to call SetSize() or SetClientSize().
+    if object.wx == nil then  -- is the object an image? images don't wrap a wx control
+      object.x = x
+      object.y = y
+      object.width = width
+      object.height = height
+    else
+      object.wx:Move(x, y)
+      object.wx:SetSize(width, height)  -- NOTE: this line assumes that anchored controls are always
+                                        -- sized based on the entire control, not just the client
+                                        -- area. If this ever becomes not true, we'll have to figure
+                                        -- out whether to call SetSize() or SetClientSize().
+    end
   end
 end
