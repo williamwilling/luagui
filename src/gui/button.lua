@@ -61,7 +61,7 @@ function Button.create(parent)
     wx.wxDefaultPosition,
     wx.wxDefaultSize)
   
-  common.propagate_events(button, { wx.wxEVT_MOTION, wx.wxEVT_RIGHT_UP, wx.wxEVT_RIGHT_DOWN, wx.wxEVT_MIDDLE_UP, wx.wxEVT_MIDDLE_DOWN })
+  common.propagate_events(button)
   common.add_mouse_events(button)
   common.add_anchor_event(button)
   common.add_event(button, 'on_click', wx.wxEVT_COMMAND_BUTTON_CLICKED)
