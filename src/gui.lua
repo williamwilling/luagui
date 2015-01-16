@@ -7,8 +7,17 @@ local Timer = require 'gui.timer'
 
 gui = {
   mouse = require 'gui.mouse',
-  keyboard = require 'gui.keyboard'
+  keyboard = require 'gui.keyboard',
+  garbage = {}
 }
+
+wx.wxGetApp():Connect(wx.wxEVT_IDLE, function()
+  for _, control in ipairs(gui.garbage) do
+    control:Destroy()
+  end
+  
+  gui.garbage = {}
+end)
 
 function gui.create_window()
   return Window.create()

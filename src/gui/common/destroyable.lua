@@ -5,8 +5,8 @@ return function(object)
       unregister_event_handler()
     end
     
-    -- Destroy the control.
-    self.wx:Destroy()
+    -- Mark the control for destruction
+    table.insert(gui.garbage, self.wx)
     
     -- Make sure that you can't inadvertently do anything with the destroyed
     -- control anymore.
