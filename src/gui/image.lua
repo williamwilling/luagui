@@ -1,8 +1,6 @@
 local common = require 'gui.common'
 
 local Image = {}
-common.is_destroyable(Image)
-
 local metatable = common.create_metatable(Image)
 
 metatable.set_x = function(object, value)
@@ -46,6 +44,18 @@ function Image.create(parent)
   table.insert(parent.images, image)
   
   return image
+end
+
+function Image:destroy()
+  for i, image in ipairs(self.parent.images) do
+    if image == self then
+      table.remove(self.parent.images, i)
+      break
+    end
+  end
+  
+  self.parent.wx_panel:Refresh(false, wx.wxRect(self.x, self.y, self.width, self.height))
+  setmetatable(self, nil)
 end
 
 return Image
