@@ -15,7 +15,8 @@ common.add_resizable(metatable, 'dialog')
 function Dialog.create(parent)
   local dialog = {
     parent = parent,
-    resizable = true
+    resizable = true,
+    images = {}
   }
   
   -- The delay prevents the dialog window from being created before the creation of its parent has
@@ -48,6 +49,10 @@ function Dialog.create(parent)
     if type(dialog.on_closing) ~= 'function' or dialog:on_closing() ~= false or not event:CanVeto() then
       dialog.wx:Destroy()
     end
+  end)
+
+  dialog.wx_panel:Connect(wx.wxEVT_PAINT, function(event)
+    common.paint_images(dialog)
   end)
   
   setmetatable(dialog, metatable)

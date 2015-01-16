@@ -197,9 +197,19 @@ function common.forward_mouse_events(object)
       
       for _, mouse_listener in ipairs(common.mouse_listeners) do
         if mouse_listener[handler_name] ~= nil then
-          local x, y = mouse_listener.wx:ScreenToClient(wx.wxGetMousePosition()):GetXY()
-          local width = mouse_listener.wx:GetSize():GetWidth()
-          local height = mouse_listener.wx:GetSize():GetHeight()
+          local x, y, width, height
+          
+          if mouse_listener.wx == nil then  -- is this an image?
+            x, y = object.wx:ScreenToClient(wx.wxGetMousePosition()):GetXY()
+            x = x - mouse_listener.x
+            y = y - mouse_listener.y
+            width = mouse_listener.width
+            height = mouse_listener.height
+          else
+            x, y = mouse_listener.wx:ScreenToClient(wx.wxGetMousePosition()):GetXY()
+            width = mouse_listener.wx:GetSize():GetWidth()
+            height = mouse_listener.wx:GetSize():GetHeight()
+          end
           
           if x >= 0 and y >= 0 and x < width and y < height then
             if param == nil then
@@ -226,6 +236,19 @@ function common.forward_mouse_events(object)
     gui.mouse.x, gui.mouse.y = object.wx:ScreenToClient(wx.wxGetMousePosition()):GetXY()
     send_mouse_event(wx.wxEVT_MOTION, 'on_mouse_move')(event)
   end)
+end
+
+function common.paint_images(window)
+  if #window.images == 0 then return end
+  local dc = wx.wxPaintDC(window.wx_panel)
+  
+  for _, image in ipairs(window.images) do
+    local bitmap = wx.wxBitmap(image.image:Scale(image.width, image.height))  
+    dc:DrawBitmap(bitmap, image.x, image.y, image.image:HasMask())
+    bitmap:delete()
+  end
+  
+  dc:delete()
 end
 
 return common
