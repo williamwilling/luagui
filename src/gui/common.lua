@@ -228,4 +228,17 @@ function common.forward_mouse_events(object)
   end)
 end
 
+function common.paint_images(window)
+  if #window.images == 0 then return end
+  local dc = wx.wxPaintDC(window.wx_panel)
+  
+  for _, image in ipairs(window.images) do
+    local bitmap = wx.wxBitmap(image.image:Scale(image.width, image.height))  
+    dc:DrawBitmap(bitmap, image.x, image.y, image.image:HasMask())
+    bitmap:delete()
+  end
+  
+  dc:delete()
+end
+
 return common
