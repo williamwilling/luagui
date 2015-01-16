@@ -16,7 +16,9 @@ common.add_color(metatable, 'window')
 common.add_resizable(metatable, 'window')
 
 function Window.create()
-  local window = {}
+  local window = {
+    images = {}
+  }
   
   window.wx = wx.wxFrame(
     wx.NULL,
@@ -45,6 +47,19 @@ function Window.create()
     if type(window.on_closing) ~= 'function' or window:on_closing() ~= false or not event:CanVeto() then
       window.wx:Destroy()
     end
+  end)
+
+  window.wx_panel:Connect(wx.wxEVT_PAINT, function(event)
+    if #window.images == 0 then return end
+    local dc = wx.wxPaintDC(window.wx_panel)
+    
+    for _, image in ipairs(window.images) do
+      local bitmap = wx.wxBitmap(image.image:Scale(image.width, image.height))  
+      dc:DrawBitmap(bitmap, image.x, image.y, image.image:HasMask())
+      bitmap:delete()
+    end
+    
+    dc:delete()
   end)
   
   window.wx:Show(true)
