@@ -39,8 +39,7 @@ function Image.create(parent)
     wx_events = {}
   }
   
-  --common.propagate_events(image)
-  --common.add_mouse_events(image)
+  common.add_mouse_events(image)
   
   setmetatable(image, metatable)
   
