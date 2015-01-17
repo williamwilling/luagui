@@ -82,6 +82,8 @@ function Window.create()
   common.add_event(window, 'on_move', wx.wxEVT_MOVE)
   
   setmetatable(window, metatable)
+  window.cursor = "arrow"
+  
   return window
 end
 
