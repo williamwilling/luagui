@@ -15,6 +15,26 @@ common.add_label(metatable, 'window', 'title')
 common.add_color(metatable, 'window')
 common.add_resizable(metatable, 'window')
 
+function metatable.set_cursor(object, value)
+  local cursors = {
+    ["arrow"] = wx.wxCURSOR_ARROW,
+    ["right arrow"] = wx.wxCURSOR_RIGHT_ARROW,
+    ["hand"] = wx.wxCURSOR_HAND,
+    ["magnifier"] = wx.wxCURSOR_MAGNIFIER,
+    ["no entry"] = wx.wxCURSOR_NO_ENTRY,
+    ["question"] = wx.wxCURSOR_QUESTION_ARROW,
+    ["size sinister"] = wx.wxCURSOR_SIZENESW,
+    ["size baroque"] = wx.wxCURSOR_SIZENWSE,
+    ["size horizontal"] = wx.wxCURSOR_SIZEWE,
+    ["size vertical"] = wx.wxCURSOR_SIZENS,
+    ["move"] = wx.wxCURSOR_SIZING,
+    ["wait"] = wx.wxCURSOR_WAIT,
+    ["wait arrow"] = wx.wxCURSOR_ARROWWAIT
+  }
+  
+  object.wx:SetCursor(wx.wxCursor(cursors[value] or wx.wxCURSOR_ARROW))
+end
+
 function Window.create()
   local window = {
     images = {}
