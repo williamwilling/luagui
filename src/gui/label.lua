@@ -5,48 +5,96 @@ common.is_destroyable(Label)
 
 local metatable = common.create_metatable(Label)
 common.add_position(metatable, 'label')
-common.add_size(metatable, 'label')
-common.add_label(metatable, 'label', 'text')
 common.add_color(metatable, 'label')
 common.add_text_color(metatable, 'label')
 
 local function word_wrap(label)
-  label.width = label.width
+  local width, height = label.width, label.height
+  
+  label.wx:SetLabel(metatable[label].original_text)
+  label.wx:Wrap(width)
+  
+  if label.width < width then
+    label.wx:SetSize(width, label.height)
+  end
+  
+  if metatable[label].fixed_height then
+    label.wx:SetSize(label.width, height)
+  end
 end
 
-local base_set_text = metatable.set_text
+function metatable.get_text(object)
+  return object.wx:GetLabel()
+end
+
 function metatable.set_text(object, value)
   metatable[object].original_text = value
+  local width, height = object.width, object.height
   
-  if object.width > 0 then
-    word_wrap(object)
-  else
-    base_set_text(object, value)
+  object.wx:SetLabel(value)
+  
+  if metatable[object].fixed_width then
+    object.wx:SetSize(width, object.height)
   end
-end
-
-local base_set_width = metatable.set_width
-function metatable.set_width(object, value)
-  object.wx:SetLabel(metatable[object].original_text or '')
+  
+  if metatable[object].fixed_height then
+    object.wx:SetSize(object.width, height)
+  end
   
   if object.word_wrap then
-    object.wx:Wrap(value)
+    if object.x + object.width > object.parent.width then
+      object.width = object.parent.width - object.x
+    end
+    
+    word_wrap(object)
   end
-  
-  base_set_width(object, value)
 end
 
 function metatable.set_word_wrap(object, value)
-  local values = getmetatable(object)[object]
-  values.word_wrap = value
-  
-  word_wrap(object)
+  if value == true then
+    if object.x + object.width > object.parent.width then
+      object.width = object.parent.width - object.x
+    end
+    
+    word_wrap(object)
+  end
 end
+
+function metatable.get_width(object)
+  return object.wx:GetSize():GetWidth()
+end
+
+function metatable.set_width(object, value)
+  metatable[object].fixed_width = true
+  object.wx:SetSize(value, object.height)
+  
+  if object.word_wrap then
+    word_wrap(object)
+  end
+  
+  return object.wx:GetSize():GetWidth()
+end
+
+function metatable.get_height(object)
+  return object.wx:GetSize():GetHeight()
+end
+
+function metatable.set_height(object, value)
+  metatable[object].fixed_height = true
+  object.wx:SetSize(object.width, value)
+  return object.wx:GetSize():GetHeight()
+end
+
+common.add_anchor(metatable, 'label')
 
 function Label.create(parent)
   local label = {
     parent = parent,
     wx_events = {}
+  }
+  
+  metatable[label] = {
+    size = {}
   }
   
   label.wx = wx.wxStaticText(
@@ -59,6 +107,11 @@ function Label.create(parent)
   
   common.propagate_events(label)
   common.add_mouse_events(label)
+  common.add_anchor_event(label, function()
+    if label.word_wrap then
+      word_wrap(label)
+    end
+  end)
   
   setmetatable(label, metatable)
   label.anchor = 'top left'
