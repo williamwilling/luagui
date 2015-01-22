@@ -7,6 +7,8 @@ local metatable = common.create_metatable(Label)
 common.add_position(metatable, 'label')
 common.add_size(metatable, 'label')
 common.add_label(metatable, 'label', 'text')
+common.add_color(metatable, 'label')
+common.add_text_color(metatable, 'label')
 
 local function word_wrap(label)
   label.width = label.width
