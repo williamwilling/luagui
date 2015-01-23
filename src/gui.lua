@@ -8,7 +8,8 @@ local Timer = require 'gui.timer'
 gui = {
   mouse = require 'gui.mouse',
   keyboard = require 'gui.keyboard',
-  garbage = {}
+  garbage = {},
+  version = 4
 }
 
 wx.wxGetApp():Connect(wx.wxEVT_IDLE, function()
