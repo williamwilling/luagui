@@ -230,7 +230,7 @@ local api = {
         type = 'method',
         description = 'The event handler that is called when the dialog is about to close. Return false from the event handler to prevent the dialog from closing.',
         args = '()',
-        return = '()'
+        returns = '()'
       },
       
       on_key_down = {
@@ -847,7 +847,7 @@ local api = {
         type = 'method',
         description = 'The event handler that is called when the window is about to close. Return false from the event handler to prevent the window from closing.',
         args = '()',
-        return = '()'
+        returns = '()'
       },
       
       on_key_down = {
