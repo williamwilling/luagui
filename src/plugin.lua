@@ -427,6 +427,16 @@ local api = {
     description = 'A label with static text.',
     
     childs = {
+      anchor = {
+        type = 'value',
+        description = "The sides of the label's parent to which the label is anchored. When the label is anchored to a side, the distance between the label and the parent's side don't change when you resize the parent. Valid values are 'left', 'right', 'top', 'bottom', or combinations thereof separated by a space. 'all' is a shortcut for 'top left bottom right'."
+      },
+      
+      background_color = {
+        type = 'value',
+        description = 'The background color of the label. You can specify the color as a list of numbers in the order red, green, blue, or as a table with the fields red, green and blue. So, the color orange would be either { 1.0, 0.4, 0 } or { red = 1.0, green = 0.4, blue = 0 }. When you read the background color, it is always specified in the second format. This property is not supported under MacOS.'
+      },
+      
       height = {
         type = 'value',
         description = "The label's height in pixels."
@@ -435,6 +445,11 @@ local api = {
       text = {
         type = 'value',
         description = 'The text that is displayed on the label.'
+      },
+      
+      text_color = {
+        type = 'value',
+        description = 'The color of the text on the label. You can specify the color as a list of numbers in the order red, green, blue, or as a table with the fields red, green and blue. So, the color orange would be either { 1.0, 0.4, 0 } or { red = 1.0, green = 0.4, blue = 0 }. When you read the text color, it is always specified in the second format. This property is not supported under MacOS.'
       },
       
       width = {
