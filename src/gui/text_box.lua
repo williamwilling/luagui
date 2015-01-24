@@ -13,7 +13,7 @@ common.add_color(metatable, 'text_box')
 common.add_text_color(metatable, 'text_box')
 
 local function create_text_box(text_box)
-  local style = 0
+  local style = wx.wxTE_NOHIDESEL
   
   if text_box.multiline then
     style = style + wx.wxTE_MULTILINE
@@ -83,6 +83,10 @@ function TextBox.create(parent)
   
   create_text_box(text_box)
   return text_box
+end
+
+function TextBox:select_all()
+  self.wx:SetSelection(-1, -1)
 end
 
 return TextBox
