@@ -612,6 +612,28 @@ local api = {
     }
   },
   
+  selection = {
+    type = 'class',
+    description = 'Information on the text that is selected in a text box.',
+    
+    childs = {
+      from = {
+        type = 'value',
+        description = 'The index of the first character that is selected.'
+      },
+      
+      to = {
+        type = 'value',
+        description = 'The index of the last character that is selected.'
+      },
+      
+      text = {
+        type = 'value',
+        description = 'The selected text.'
+      }
+    }
+  },
+  
   text_box = {
     type = 'class',
     description = 'A box in which the user can enter text.',
@@ -627,20 +649,6 @@ local api = {
         description = 'The background color of the text box. You can specify the color as a list of numbers in the order red, green, blue, or as a table with the fields red, green and blue. So, the color orange would be either { 1.0, 0.4, 0 } or { red = 1.0, green = 0.4, blue = 0 }. When you read the background color, it is always specified in the second format. This property is not supported under MacOS.'
       },
       
-      destroy = {
-        type = 'method',
-        description = 'Removes the text box from its window. Once a text box is destroyed, you can\'t access its properties, call its functions, or listen to its events anymore.',
-        args = '()',
-        returns = '()'
-      },
-      
-      focus = {
-        type = 'method',
-        description = 'Gives the keyboard focus to the text box.',
-        args = '()',
-        returns = '()'
-      },
-      
       height = {
         type = 'value',
         description = "The text box's height in pixels.",
@@ -649,6 +657,12 @@ local api = {
       multiline = {
         type = 'value',
         description = 'true if the text box can show multiple lines of text, false if it only shows one.'
+      },
+      
+      selection = {
+        type = 'value',
+        description = 'Information on the text that is currently selected in the text box.',
+        valuetype = 'selection'
       },
       
       text = {
@@ -679,6 +693,20 @@ local api = {
       y = {
         type = 'value',
         description = "The text box's y-coordinate in pixels relative to the window."
+      },
+      
+      destroy = {
+        type = 'method',
+        description = 'Removes the text box from its window. Once a text box is destroyed, you can\'t access its properties, call its functions, or listen to its events anymore.',
+        args = '()',
+        returns = '()'
+      },
+      
+      focus = {
+        type = 'method',
+        description = 'Gives the keyboard focus to the text box.',
+        args = '()',
+        returns = '()'
       },
       
       on_mouse_down = {
