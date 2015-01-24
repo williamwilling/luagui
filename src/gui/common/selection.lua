@@ -10,7 +10,12 @@ end
 
 function Selection.get_to(object)
   local from, to = object.control.wx:GetSelection()
-  return to
+  
+  if to <= from then
+    return nil
+  else
+    return to
+  end
 end
 
 function Selection.get_text(object)
