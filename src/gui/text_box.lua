@@ -12,6 +12,15 @@ common.add_value(metatable, 'text box', 'text')
 common.add_color(metatable, 'text_box')
 common.add_text_color(metatable, 'text_box')
 
+function metatable.get_selection(object)
+  local from, to = object.wx:GetSelection()
+  return {
+    from = from + 1,
+    to = to,
+    text = object.wx:GetRange(from, to)
+  }
+end
+
 local function create_text_box(text_box)
   local style = wx.wxTE_NOHIDESEL
   
