@@ -88,17 +88,4 @@ function TextBox.create(parent)
   return text_box
 end
 
-function TextBox:select_all()
-  self.wx:SetSelection(-1, -1)
-end
-
-function TextBox:select(from, to)
-  if from <= to then
-    from = math.max(1, from)
-    to = math.min(#self.text, to)
-    
-    self.wx:SetSelection(from - 1, to)
-  end
-end
-
 return TextBox
