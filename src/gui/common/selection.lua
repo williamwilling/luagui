@@ -19,13 +19,13 @@ function Selection.get_to(object)
 end
 
 function Selection.get_text(object)
-  local from, to = object.control.wx:GetSelection()
-  return object.control.wx:GetRange(from, to)
+  return object.control.wx:GetStringSelection()
 end
 
 function Selection.set_from(object, value)
-  local from, to = object.control.wx:GetSelection()
+  check.parameter_type('number', value, 'selection', 'start index')
   
+  local from, to = object.control.wx:GetSelection()
   if from == to or value - 1 > to then
     object.control.wx:SetSelection(value - 1, value - 1)
   else
@@ -34,9 +34,12 @@ function Selection.set_from(object, value)
 end
 
 function Selection.set_to(object, value)
-  local from, to = object.control.wx:GetSelection()
+  check.parameter_type({ 'number', 'nil' }, value, 'selection', 'end index')
   
-  if value < from then
+  local from, to = object.control.wx:GetSelection()
+  if value == nil then
+    object.control.wx:SetSelection(from, from)
+  elseif value < from then
     object.control.wx:SetSelection(value, value)
   else
     object.control.wx:SetSelection(from, value)
