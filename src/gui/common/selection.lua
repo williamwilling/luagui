@@ -46,6 +46,17 @@ function Selection.set_to(object, value)
   end
 end
 
+function Selection.set_text(object, value)
+  check.parameter_type('string', value, 'selection', 'text')
+  
+  local from, to = object.control.wx:GetSelection()
+  if from < to then
+    object.control.wx:Replace(from, to, value)
+    _, to = object.control.wx:GetSelection()
+    object.control.wx:SetSelection(from, to)
+  end
+end
+
 return function(metatable, object_description)
   metatable.get_selection = function(object)
     local selection = { control = object }
