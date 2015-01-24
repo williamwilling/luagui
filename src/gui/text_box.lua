@@ -52,9 +52,11 @@ local function recreate_text_box(text_box)
     end
   end
   
+  local from, to = text_box.wx:GetSelection()
   local wx = text_box.wx
   create_text_box(text_box)
   wx:Destroy()
+  text_box.wx:SetSelection(from, to)
   
   for k,v in pairs(copy) do
     text_box[k] = v
