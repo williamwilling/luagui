@@ -72,7 +72,7 @@ function Window.create()
   window.wx_panel:Connect(wx.wxEVT_PAINT, function(event)
     common.paint_images(window)
   end)
-  
+
   window.wx:Show(true)
   
   common.forward_mouse_events(window)
@@ -83,6 +83,14 @@ function Window.create()
   
   setmetatable(window, metatable)
   window.cursor = "arrow"
+  
+  -- If the first control you create on a window is a text box and you change the selection
+  -- of the text box before calling gui.run(), the selection will not stick. (The text box
+  -- will select all of the text instead.) Giving focus to another control first will prevent
+  -- this problem.
+  local dummy = window:add_text_box()
+  dummy:focus()
+  dummy:destroy()
   
   return window
 end
