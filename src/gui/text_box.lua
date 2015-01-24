@@ -9,17 +9,9 @@ common.add_position(metatable, 'text box')
 common.add_size(metatable, 'text box')
 common.add_anchor(metatable, 'text box')
 common.add_value(metatable, 'text box', 'text')
-common.add_color(metatable, 'text_box')
-common.add_text_color(metatable, 'text_box')
-
-function metatable.get_selection(object)
-  local from, to = object.wx:GetSelection()
-  return {
-    from = from + 1,
-    to = to,
-    text = object.wx:GetRange(from, to)
-  }
-end
+common.add_color(metatable, 'text box')
+common.add_text_color(metatable, 'text box')
+common.add_selection(metatable, 'text box')
 
 local function create_text_box(text_box)
   local style = wx.wxTE_NOHIDESEL
