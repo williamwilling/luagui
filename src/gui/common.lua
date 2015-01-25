@@ -175,9 +175,11 @@ function common.paint_images(window)
   local dc = wx.wxPaintDC(window.wx_panel)
   
   for _, image in ipairs(window.images) do
-    local bitmap = wx.wxBitmap(image.image:Scale(image.width, image.height))  
-    dc:DrawBitmap(bitmap, image.x, image.y, image.image:HasMask())
-    bitmap:delete()
+    if image.image then
+      local bitmap = wx.wxBitmap(image.image:Scale(image.width, image.height))  
+      dc:DrawBitmap(bitmap, image.x, image.y, image.image:HasMask())
+      bitmap:delete()
+    end
   end
   
   dc:delete()

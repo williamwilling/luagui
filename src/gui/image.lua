@@ -1,4 +1,5 @@
 local common = require 'gui.common'
+local check = require 'gui.check'
 
 local Image = {}
 local metatable = common.create_metatable(Image)
@@ -24,9 +25,15 @@ metatable.set_height = function(object, value)
 end
 
 metatable.set_file_name = function(object, value)
-  object.image = wx.wxImage(value)
-  object.width = object.image:GetWidth()
-  object.height = object.image:GetHeight()
+  check.parameter_type({ 'string', 'nil' }, value, 'image', 'file name')
+  
+  if value == nil then
+    object.image = nil
+  else
+    object.image = wx.wxImage(value)
+    object.width = object.image:GetWidth()
+    object.height = object.image:GetHeight()
+  end
   
   return value
 end
