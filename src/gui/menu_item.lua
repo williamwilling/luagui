@@ -26,6 +26,7 @@ metatable.get_checked = function(object)
 end
 
 metatable.set_checked = function(object, value)
+  check.parameter_type('boolean', value, 'menu item', 'shortcut')
   return object.wx:Check(value)
 end
 
