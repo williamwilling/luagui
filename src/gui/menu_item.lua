@@ -9,7 +9,16 @@ metatable.get_text = function(object)
 end
 
 metatable.set_text = function(object, value)
-  object.wx:SetItemLabel(value)
+  check.parameter_type('string', value, 'menu item', 'shortcut')
+  
+  local text = value
+  
+  if object.shortcut ~= nil then
+    text = text .. '\t' .. object.shortcut
+  end
+  
+  object.wx:SetItemLabel(text)
+  object.parent.parent.wx:SetAcceleratorTable(wx.wxNullAcceleratorTable)
 end
 
 metatable.get_checked = function(object)
