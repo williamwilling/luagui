@@ -19,6 +19,12 @@ metatable.set_checked = function(object, value)
   return object.wx:Check(value)
 end
 
+metatable.set_shortcut = function(object, value)
+  local text = object.wx:GetItemLabelText() .. '\t' .. value
+  object.wx:SetItemLabel(text)
+  object.parent.parent.wx:SetAcceleratorTable(wx.wxNullAcceleratorTable)
+end
+
 function MenuItem.create(parent, text)
   local menu_item = {
     parent = parent
