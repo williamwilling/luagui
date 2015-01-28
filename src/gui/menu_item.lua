@@ -11,8 +11,7 @@ end
 metatable.set_text = function(object, value)
   check.parameter_type('string', value, 'menu item', 'shortcut')
   
-  local text = value
-  
+  local text = string.match(value, '(.*)\t')
   if object.shortcut ~= nil then
     text = text .. '\t' .. object.shortcut
   end
@@ -47,6 +46,7 @@ function MenuItem.create(parent, text)
     parent = parent
   }
 
+  text = string.match(text, '(.*)\t')
   menu_item.wx = wx.wxMenuItem(parent.wx, wx.wxID_ANY, text, '', wx.wxITEM_CHECK)
 
   setmetatable(menu_item, metatable)
