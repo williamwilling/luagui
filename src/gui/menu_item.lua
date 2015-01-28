@@ -1,4 +1,5 @@
 local common = require 'gui.common'
+local check = require 'gui.check'
 
 local MenuItem = {}
 local metatable = common.create_metatable(MenuItem)
@@ -20,7 +21,13 @@ metatable.set_checked = function(object, value)
 end
 
 metatable.set_shortcut = function(object, value)
-  local text = object.wx:GetItemLabelText() .. '\t' .. value
+  check.parameter_type({ 'string', 'nil' }, value, 'menu item', 'shortcut')
+  
+  local text = object.wx:GetItemLabelText()
+  if value ~= nil then
+    text = text ..'\t' .. value
+  end
+  
   object.wx:SetItemLabel(text)
   object.parent.parent.wx:SetAcceleratorTable(wx.wxNullAcceleratorTable)
 end
