@@ -554,6 +554,11 @@ local api = {
         description = "true if the menu item has a checkmark in front of it, false if it doesn't."
       },
       
+      shortcut = {
+        type = 'value',
+        description = 'The shortcut key that is displayed next to the menu item. Note that you still have to write code to respond to the shortcut key.',
+      },
+      
       text = {
         type = 'value',
         description = "The menu item's text."
