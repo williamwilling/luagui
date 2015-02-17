@@ -12,6 +12,7 @@ common.add_value(metatable, 'drop down list')
 common.add_color(metatable, 'drop down list')
 common.add_text_color(metatable, 'drop down list')
 common.add_selection(metatable, 'drop down list')
+common.add_items(metatable, 'drop down list')
 
 function DropDownList.create(parent)
   local drop_down_list = {
