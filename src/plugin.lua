@@ -787,6 +787,11 @@ local api = {
         description = 'The background color of the window. You can specify the color as a list of numbers in the order red, green, blue, or as a table with the fields red, green and blue. So, the color orange would be either { 1.0, 0.4, 0 } or { red = 1.0, green = 0.4, blue = 0 }. When you read the background color, it is always specified in the second format. This property is not supported under MacOS.'
       },
       
+      cursor = {
+        type = 'value',
+        description = 'The mouse cursor you see when the cursor is inside the window. Valid values are "arrow", "right arrow", "hand", "magnifier", "no entry", "question", "size sinister", "size baroque", "size horizontal", "size vertical", "move", "wait", and "wait arrow".'
+      },
+      
       height = {
         type = 'value',
         description = 'The height of the window in pixels. The height does not include borders, scroll bars, the title bar, the menu bar, or the status bar.'
