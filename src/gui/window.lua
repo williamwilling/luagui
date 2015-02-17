@@ -6,6 +6,7 @@ local TextBox = require 'gui.text_box'
 local Dialog = require 'gui.dialog'
 local FileDialog = require 'gui.file_dialog'
 local Image = require 'gui.image'
+local DropDownList = require 'gui.drop_down_list'
 
 local Window = {}
 local metatable = common.create_metatable(Window)
@@ -117,6 +118,10 @@ end
 
 function Window:add_text_box()
   return TextBox.create(self)
+end
+
+function Window:add_drop_down_list()
+  return DropDownList.create(self)
 end
 
 function Window:close()

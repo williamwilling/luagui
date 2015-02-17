@@ -3,6 +3,7 @@ local Button = require 'gui.button'
 local Image = require 'gui.image'
 local Label = require 'gui.label'
 local TextBox = require 'gui.text_box'
+local DropDownList = require 'gui.drop_down_list'
 
 local Dialog = {}
 local metatable = common.create_metatable(Dialog)
@@ -73,6 +74,10 @@ end
 
 function Dialog:add_text_box()
   return TextBox.create(self)
+end
+
+function Dialog:add_drop_down_list()
+  return DropDownList.create(self)
 end
 
 function Dialog:show_modal()
