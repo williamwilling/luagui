@@ -42,6 +42,7 @@ function DropDownList.create(parent)
   common.propagate_events(drop_down_list)
   common.add_mouse_events(drop_down_list)
   common.add_anchor_event(drop_down_list)
+  common.add_event(drop_down_list, 'on_select', wx.wxEVT_COMMAND_CHOICE_SELECTED)
   
   setmetatable(drop_down_list, metatable)
   drop_down_list.anchor = 'top left'
