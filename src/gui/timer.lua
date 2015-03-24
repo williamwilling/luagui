@@ -8,7 +8,10 @@ local function initialize()
   stop_watch = wx.wxStopWatch()
   stop_watch:Start()
   
+  
   wx:wxGetApp():Connect(wx.wxEVT_IDLE, function(event)
+    gui.collect_garbage()
+    
     if #timers == 0 then
       return
     end

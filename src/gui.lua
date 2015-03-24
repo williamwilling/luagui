@@ -12,13 +12,17 @@ gui = {
   version = 4
 }
 
-wx.wxGetApp():Connect(wx.wxEVT_IDLE, function()
+-- This function is publicly available, because when you create a timer, the
+-- the timer overrides the idle event handler and needs to call this function.
+function gui.collect_garbage()
   for _, control in ipairs(gui.garbage) do
     control:Destroy()
   end
   
   gui.garbage = {}
-end)
+end
+
+wx.wxGetApp():Connect(wx.wxEVT_IDLE, gui.collect_garbage)
 
 function gui.create_window()
   return Window.create()
